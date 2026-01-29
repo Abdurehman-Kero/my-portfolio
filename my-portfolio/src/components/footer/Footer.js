@@ -4,27 +4,26 @@ import { logo } from "../../assets/index";
 import { SiLeetcode } from "react-icons/si";
 import { Link } from "react-scroll";
 // import { navLinksdata } from "../../constants";
+   import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
   return (
     <div className="w-full py-20 h-auto border-b-[1px] border-b-black flex flex-col md:flex-row justify-between gap-8">
       <div className="w-full h-full flex flex-col gap-8">
-        <div className="">
-        
-        </div>
+        <div className=""></div>
         <div className="flex gap-4">
           <span className="bannerIcon">
-            <a
-              href="https://www.instagram.com/fraolala/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FaInstagram />
+            <a href="https://t.me/moti_kr" target="_blank" rel="noreferrer">
+              <FaTelegramPlane />
             </a>
           </span>
           <span className="bannerIcon">
-            <a href="https://x.com" target="_blank" rel="noreferrer">
-              <FaTwitter />
+            <a
+              href="https://wa.me/+251982310974"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaWhatsapp />
             </a>
           </span>
           <span className="bannerIcon">

@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaInstagram, FaTwitter, FaLinkedinIn, FaDownload } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
+import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 
 const Media = () => {
   const handleDownload = () => {
@@ -14,20 +15,26 @@ const Media = () => {
           Let's Connect
         </h2>
         <div className="flex gap-4">
-          <span className="bannerIcon">
-            <a
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FaInstagram />
-            </a>
-          </span>
-          <span className="bannerIcon">
-            <a href="https://x.com/" target="_blank" rel="noreferrer">
-              <FaTwitter />
-            </a>
-          </span>
+       
+<span className="bannerIcon">
+  <a
+    href="https://t.me/moti_kr"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <FaTelegramPlane />
+  </a>
+</span>
+<span className="bannerIcon">
+  <a
+    href="https://wa.me/+251982310974"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <FaWhatsapp />
+  </a>
+</span>
+
           <span className="bannerIcon">
             <a
               href="https://www.linkedin.com/in/abdukr"

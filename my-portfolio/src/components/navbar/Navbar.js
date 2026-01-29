@@ -3,10 +3,11 @@ import { Link } from "react-scroll";
 import { FiMenu } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 import { FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
-import { logo } from "../../assets/index";
+
 import { navLinksdata } from "../../constants";
 import { SiLeetcode } from "react-icons/si";
 import PopUp from "../popup/popup";
+   import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -55,14 +56,7 @@ const Navbar = () => {
             <div className="w-[80%] h-screen overflow-scroll absolute top-0 left-0 bg-[#212428] p-4 scrollbar-hide">
               <div className="flex flex-col gap-8 py-2 relative">
                 <div>
-                  <video
-                    src={logo}
-                    alt="logo"
-                    className="cursor-pointer"
-                    autoPlay
-                    loop
-                    muted
-                  />
+                  
                   <p className="text-sm text-gray-400 mt-2">
                     I design experiences that are both functional and exciting,
                     making every interaction feel smooth and memorable.
@@ -93,38 +87,40 @@ const Navbar = () => {
                     Let's Connect
                   </h2>
                   <div className="flex gap-4">
+                     
                     <span className="bannerIcon">
-                      <a
-                        href="https://www.instagram.com"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <FaInstagram />
-                      </a>
-                    </span>
-                    <span className="bannerIcon">
-                      <a href="https://x.com/" target="_blank" rel="noreferrer">
-                        <FaTwitter />
-                      </a>
-                    </span>
-                    <span className="bannerIcon">
-                      <a
-                        href="https://www.linkedin.com/in/abdukr"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <FaLinkedinIn />
-                      </a>
-                    </span>
-                    <span className="bannerIcon">
-                      <a
-                        href="https://leetcode.com/Fraol27/"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <SiLeetcode />
-                      </a>
-                    </span>
+                                <a href="https://t.me/moti_kr" target="_blank" rel="noreferrer">
+                                  <FaTelegramPlane />
+                                </a>
+                              </span>
+                              <span className="bannerIcon">
+                                <a
+                                  href="https://wa.me/+251982310974"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <FaWhatsapp />
+                                </a>
+                              </span>
+                              <span className="bannerIcon">
+                                <a
+                                  href="https://www.linkedin.com/in/abdukr"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <FaLinkedinIn />
+                                </a>
+                              </span>
+                              <span className="bannerIcon">
+                                <a
+                                  href="https://leetcode.com/u/Abdurehman-kr/"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <SiLeetcode />
+                                </a>
+                              </span> 
+                     
                   </div>
                 </div>
                 <span

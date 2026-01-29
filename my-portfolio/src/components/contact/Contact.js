@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Title from '../layouts/Title';
-import ContactLeft from './ContactLeft';
-import emailjs from '@emailjs/browser';
+import React, { useState } from "react";
+import Title from "../layouts/Title";
+import ContactLeft from "./ContactLeft";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [username, setUsername] = useState("");
@@ -11,6 +11,7 @@ const Contact = () => {
   const [message, setMessage] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const emailValidation = () => {
     return String(email)
@@ -18,61 +19,103 @@ const Contact = () => {
       .match(/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/);
   };
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
+    setErrMsg("");
+    setSuccessMsg("");
 
     if (username === "") {
       setErrMsg("Username is required!");
+      return;
     } else if (phoneNumber === "") {
       setErrMsg("Phone number is required!");
+      return;
     } else if (email === "") {
       setErrMsg("Please provide your Email!");
+      return;
     } else if (!emailValidation(email)) {
       setErrMsg("Provide a valid Email!");
+      return;
     } else if (subject === "") {
       setErrMsg("Subject is required!");
+      return;
     } else if (message === "") {
       setErrMsg("Message is required!");
-    } else {
-      setErrMsg("");
+      return;
+    }
 
-      const templateParams = {
-        username: username,
-        phone: phoneNumber,
-        email: email,
-        subject: subject,
-        message: message,
-      };
+    setLoading(true);
 
-      emailjs
-        .send(
-          'service_2o2uq7f', // Replace with your EmailJS service ID
-          'template_ty7chfm', // Replace with your EmailJS template ID
-          templateParams,
-          'hsYTzVeqACb-OoHY1' // Replace with your EmailJS public key
-        )
-        .then(
-          (response) => {
-            console.log('SUCCESS!', response.status, response.text);
-            setSuccessMsg(
-              `Thank you, ${username}. Your message has been sent successfully!`
-            );
-            setUsername("");
-            setPhoneNumber("");
-            setEmail("");
-            setSubject("");
-            setMessage("");
-          },
-          (error) => {
-            console.error('FAILED...', error);
-            setErrMsg("Failed to send the message. Please try again.");
-          }
-        );
+    try {
+      // 1. FIRST: Save to your MySQL backend (MOST IMPORTANT)
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: username,
+          email: email,
+          phone: phoneNumber,
+          subject: subject,
+          message: message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // 2. TRY EmailJS (optional - if it fails, still show success)
+        try {
+          const templateParams = {
+            username: username,
+            phone: phoneNumber,
+            email: email,
+            subject: subject,
+            message: message,
+          };
+
+          await emailjs.send(
+            "service_2o2uq7f",
+            "template_ty7chfm",
+            templateParams,
+            "hsYTzVeqACb-OoHY1",
+          );
+
+          // EmailJS succeeded
+          setSuccessMsg(
+            `Thank you ${username}! Message sent successfully!.`,
+          );
+        } catch (emailError) {
+          // EmailJS failed but backend succeeded
+          console.log("EmailJS error (optional):", emailError);
+          setSuccessMsg(
+            `Thank you ${username}! Message saved successfully. (Email notification skipped)`,
+          );
+        }
+
+        // Clear form regardless of EmailJS
+        setUsername("");
+        setPhoneNumber("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
+      } else {
+        throw new Error(data.error || "Failed to save");
+      }
+    } catch (error) {
+      console.error("Backend Error:", error);
+      setErrMsg("Failed to send message. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <section id="contact" className="w-full py-12 border-b-[1px] border-b-black">
+    <section
+      id="contact"
+      className="w-full py-12 border-b-[1px] border-b-black"
+    >
       <div className="flex justify-center items-center text-center">
         <Title title="CONTACT" des="Contact With Me" />
       </div>
@@ -80,7 +123,10 @@ const Contact = () => {
         <div className="w-full h-auto flex flex-col lgl:flex-row justify-between">
           <ContactLeft />
           <div className="w-full lgl:w-[60%] h-full py-10 bg-gradient-to-r from-[#1e2024] to-[#23272b] flex flex-col gap-8 p-4 lgl:p-8 rounded-lg shadow-shadowOne">
-            <form className="w-full flex flex-col gap-4 lgl:gap-6 py-2 lgl:py-5">
+            <form
+              className="w-full flex flex-col gap-4 lgl:gap-6 py-2 lgl:py-5"
+              onSubmit={handleSend}
+            >
               {errMsg && (
                 <p className="py-3 text-orange-500 text-base text-center">
                   {errMsg}
@@ -101,6 +147,7 @@ const Contact = () => {
                     value={username}
                     className="contactInput"
                     type="text"
+                    required
                   />
                 </div>
                 <div className="w-full lgl:w-1/2 flex flex-col gap-4">
@@ -112,6 +159,7 @@ const Contact = () => {
                     value={phoneNumber}
                     className="contactInput"
                     type="text"
+                    required
                   />
                 </div>
               </div>
@@ -124,6 +172,7 @@ const Contact = () => {
                   value={email}
                   className="contactInput"
                   type="email"
+                  required
                 />
               </div>
               <div className="flex flex-col gap-4">
@@ -135,6 +184,7 @@ const Contact = () => {
                   value={subject}
                   className="contactInput"
                   type="text"
+                  required
                 />
               </div>
               <div className="flex flex-col gap-4">
@@ -147,16 +197,22 @@ const Contact = () => {
                   className="contactTextArea"
                   cols="30"
                   rows="8"
+                  required
                 ></textarea>
               </div>
               <div className="w-full">
                 <button
-                  onClick={handleSend}
-                  className="w-full h-12 bg-[#141518] rounded-lg text-base text-gray-400 uppercase hover:text-white duration-300"
+                  type="submit"
+                  disabled={loading}
+                  className="w-full h-12 bg-[#141518] rounded-lg text-base text-gray-400 uppercase hover:text-white duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {loading ? "Sending..." : "Send Message"}
                 </button>
               </div>
+              <p className="text-xs text-gray-500 text-center">
+                Note: Message will be saved to database. Email notification is
+                optional.
+              </p>
             </form>
           </div>
         </div>
