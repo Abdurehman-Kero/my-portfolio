@@ -7,6 +7,7 @@ import { FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import { navLinksdata } from "../../constants";
 import { SiLeetcode } from "react-icons/si";
 import PopUp from "../popup/popup";
+   import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -86,38 +87,40 @@ const Navbar = () => {
                     Let's Connect
                   </h2>
                   <div className="flex gap-4">
+                     
                     <span className="bannerIcon">
-                      <a
-                        href="https://www.instagram.com"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <FaInstagram />
-                      </a>
-                    </span>
-                    <span className="bannerIcon">
-                      <a href="https://x.com/" target="_blank" rel="noreferrer">
-                        <FaTwitter />
-                      </a>
-                    </span>
-                    <span className="bannerIcon">
-                      <a
-                        href="https://www.linkedin.com/in/abdukr"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <FaLinkedinIn />
-                      </a>
-                    </span>
-                    <span className="bannerIcon">
-                      <a
-                        href="https://leetcode.com/Fraol27/"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <SiLeetcode />
-                      </a>
-                    </span>
+                                <a href="https://t.me/moti_kr" target="_blank" rel="noreferrer">
+                                  <FaTelegramPlane />
+                                </a>
+                              </span>
+                              <span className="bannerIcon">
+                                <a
+                                  href="https://wa.me/+251982310974"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <FaWhatsapp />
+                                </a>
+                              </span>
+                              <span className="bannerIcon">
+                                <a
+                                  href="https://www.linkedin.com/in/abdukr"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <FaLinkedinIn />
+                                </a>
+                              </span>
+                              <span className="bannerIcon">
+                                <a
+                                  href="https://leetcode.com/u/Abdurehman-kr/"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <SiLeetcode />
+                                </a>
+                              </span> 
+                     
                   </div>
                 </div>
                 <span

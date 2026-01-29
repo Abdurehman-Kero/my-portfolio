@@ -84,7 +84,7 @@ const Contact = () => {
 
           // EmailJS succeeded
           setSuccessMsg(
-            `Thank you ${username}! Message sent successfully and email notification sent.`,
+            `Thank you ${username}! Message sent successfully!.`,
           );
         } catch (emailError) {
           // EmailJS failed but backend succeeded

@@ -7,7 +7,9 @@ import FooterBottom from "./components/footer/FooterBottom";
 import Navbar from "./components/navbar/Navbar";
 import Projects from "./components/projects/Projects";
 import Resume from "./components/resume/Resume";
+import Sidebar from "./components/banner/stats";
 // import Testimonial from "./components/tesimonial/Testimonial";
+
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
       <Navbar />
       <div className="max-w-screen-xl mx-auto">
         <Banner />
+        <Sidebar />
         <Features />
         <Projects />
         <Resume />

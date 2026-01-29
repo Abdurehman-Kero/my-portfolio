@@ -1,9 +1,24 @@
-import React from 'react'
-import Title from '../layouts/Title'
-import { projectOne, projectTwo, projectThree, projectFour, projectFive, projectSix, projectSeven, projectEight, projectNine } from "../../assets/index";
-import ProjectsCard from './ProjectsCard';
+import React from "react";
+import Title from "../layouts/Title";
+import {
+  projectOne,
+  projectTwo,
+  projectThree,
+  projectFour,
+  projectFive,
+  projectSix,
+  projectSeven,
+  projectEight,
+  projectNine,
+} from "../../assets/index";
+import ProjectsCard from "./ProjectsCard";
 
 const Projects = () => {
+  // Handle image click to redirect to link2
+  const handleImageClick = (url) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <section
       id="projects"
@@ -21,8 +36,12 @@ const Projects = () => {
           des="Modern Amazon clone with React , Node.js & Firebase authentication."
           src={projectOne}
           link1="https://github.com/Abdurehman-Kero/amazon-Clone-2025"
-          link2="https://694a555d36119e00084337f5--amazoncloneabdu.netlify.app/
-"
+          link2="https://694a555d36119e00084337f5--amazoncloneabdu.netlify.app/"
+          onImageClick={() =>
+            handleImageClick(
+              "https://694a555d36119e00084337f5--amazoncloneabdu.netlify.app/",
+            )
+          }
         />
 
         <ProjectsCard
@@ -30,25 +49,32 @@ const Projects = () => {
           des="⭐A collaborative, developer-centric platform designed to facilitate question-and-answer discussions and foster continuous learning🤝"
           src={projectFour}
           link1="https://github.com/mikretadesse/evangadi-forum-G3"
-          link2="https://forum.abdurehman.com/how-it-works"
+          link2="https://forum.abdurehman.com/"
+          onImageClick={() => handleImageClick("https://forum.abdurehman.com/")}
         />
         <ProjectsCard
           title="🌱 Netflix Clone"
           des="A Netflix clone created with React.js and Firebase Authentication, featuring seamless user authentication and a responsive, immersive UI. "
           src={projectTwo}
-          link1="https://github.com/Abdurehman-Kero/Netflix-Clone-2025
-"
-          link2="https://abdurehman-kero.github.io/Netflix-Clone-2025/
-"
+          link1="https://github.com/Abdurehman-Kero/Netflix-Clone-2025"
+          link2="https://abdurehman-kero.github.io/Netflix-Clone-2025/"
+          onImageClick={() =>
+            handleImageClick(
+              "https://abdurehman-kero.github.io/Netflix-Clone-2025/",
+            )
+          }
         />
         <ProjectsCard
           title="🌱 Apple.com Clone"
           des="⭐A modern Apple.com clone built with React.js and Bootstrap, replicating the latest design, layout, and responsive user experience."
           src={projectThree}
-          link1="https://github.com/Abdurehman-Kero/Netflix-Clone-2025
-"
-          link2="https://github.com/Abdurehman-Kero/apple-full-stack
-"
+          link1="https://github.com/Abdurehman-Kero/apple-full-stack"
+          link2="https://github.com/Abdurehman-Kero/apple-full-stack"
+          onImageClick={() =>
+            handleImageClick(
+              "https://github.com/Abdurehman-Kero/apple-full-stack",
+            )
+          }
         />
         <ProjectsCard
           title="🌱 Evangadi Menu"
@@ -56,6 +82,7 @@ const Projects = () => {
           src={projectFive}
           link1="https://github.com/Abdurehman-Kero/EvangadiMenu"
           link2="https://abdu.abdurehman.com/"
+          onImageClick={() => handleImageClick("https://abdu.abdurehman.com/")}
         />
         <ProjectsCard
           title="🌱 BrightRoot Academy Platform"
@@ -63,10 +90,15 @@ const Projects = () => {
           src={projectSix}
           link1="https://github.com/Miftah-Ebrahim/INSA_Group6_BrightRoot_Academy"
           link2="https://github.com/Miftah-Ebrahim/INSA_Group6_BrightRoot_Academy"
+          onImageClick={() =>
+            handleImageClick(
+              "https://github.com/Miftah-Ebrahim/INSA_Group6_BrightRoot_Academy",
+            )
+          }
         />
       </div>
     </section>
   );
-}
+};
 
-export default Projects
+export default Projects;
