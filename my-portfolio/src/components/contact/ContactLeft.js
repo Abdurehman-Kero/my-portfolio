@@ -2,6 +2,8 @@ import React from 'react'
 import { FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import { contactImg } from "../../assets/index";
 import { SiLeetcode } from 'react-icons/si';
+   import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
+
 
 const ContactLeft = () => {
   return (
@@ -35,16 +37,20 @@ const ContactLeft = () => {
         <div className="flex gap-4">
           <span className="bannerIcon">
             <a
-              href="https://www.instagram.com"
+              href="https://t.me/moti_kr"
               target="_blank"
               rel="noreferrer"
             >
-              <FaInstagram />
+              <FaTelegramPlane />
             </a>
           </span>
           <span className="bannerIcon">
-            <a href="https://x.com" target="_blank" rel="noreferrer">
-              <FaTwitter />
+            <a
+              href="https://wa.me/+251982310974"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaWhatsapp />
             </a>
           </span>
           <span className="bannerIcon">

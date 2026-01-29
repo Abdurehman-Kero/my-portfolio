@@ -3,7 +3,7 @@ import { Link } from "react-scroll";
 import { FiMenu } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 import { FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
-import { logo } from "../../assets/index";
+
 import { navLinksdata } from "../../constants";
 import { SiLeetcode } from "react-icons/si";
 import PopUp from "../popup/popup";
@@ -55,14 +55,7 @@ const Navbar = () => {
             <div className="w-[80%] h-screen overflow-scroll absolute top-0 left-0 bg-[#212428] p-4 scrollbar-hide">
               <div className="flex flex-col gap-8 py-2 relative">
                 <div>
-                  <video
-                    src={logo}
-                    alt="logo"
-                    className="cursor-pointer"
-                    autoPlay
-                    loop
-                    muted
-                  />
+                  
                   <p className="text-sm text-gray-400 mt-2">
                     I design experiences that are both functional and exciting,
                     making every interaction feel smooth and memorable.
