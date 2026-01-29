@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer components {
+  .bannerIcon {
+    @apply w-16 h-16 bg-black bg-opacity-25 text-gray-200 text-xl inline-flex items-center justify-center rounded-md shadow-shadowOne hover:bg-opacity-40 hover:-translate-y-1 transition-all hover:text-[#5ACF53] cursor-pointer duration-300;
+  }
+  .resumeLi {
+    @apply w-full h-20 bg-black bg-opacity-25 text-xl text-gray-300 flex justify-center cursor-pointer hover:bg-opacity-40 duration-300 items-center border-[1px] rounded-none;
+  }
+  .bgOpacity {
+    @apply bg-black bg-opacity-40;
+  }
+  .contactInput {
+    @apply w-full h-12 rounded-lg border-b-[1px] border-b-gray-600 bg-[#191b1e] text-lightText px-4 active:outline-none focus-visible:outline-[#5ACF53] outline-none focus-visible:border-b-transparent duration-300;
+  }
+  .contactTextArea {
+    @apply w-full rounded-lg border-b-[1px] border-b-gray-600 bg-[#191b1e] text-lightText px-4 py-2 active:outline-none focus-visible:outline-[#5ACF53] outline-none focus-visible:border-b-transparent duration-300 resize-none;
+  }
+}
+
+/* Popup Style */
+.popup {
+  animation: slideIn 1s forwards;
+}
+
+/* Slide In Animation */
+@keyframes slideIn {
+  from {
+    right: -300px;
+    opacity: 0;
+  }
+  to {
+    right: 0px;
+    opacity: 1;
+  }
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.active {
+  color: #5ACF53;
+  position: relative;
+}
+
+.active::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #5ACF53;
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  transition: transform 0.2s ease-in-out;
+}
+
+.active::after {
+  transform: scaleX(1);
+}
