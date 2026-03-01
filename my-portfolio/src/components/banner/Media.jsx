@@ -6,7 +6,7 @@ import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 const Media = () => {
   const handleDownload = () => {
     window.location.href =
-      "https://drive.google.com/file/d/1mgyp48-LGq_FFxUxIh_4KTmfalW4myKK/view?usp=sharing";
+      "https://drive.google.com/file/d/1n1oK-sHLQeFEa5mBJ71dm7zVpK5M6WYp/view?usp=sharing";
   };
   return (
     <div className="flex flex-col xl:flex-row gap-6 lgl:gap-0 justify-between">

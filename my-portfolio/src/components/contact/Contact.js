@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Title from "../layouts/Title";
 import ContactLeft from "./ContactLeft";
-import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [username, setUsername] = useState("");
@@ -24,6 +23,7 @@ const Contact = () => {
     setErrMsg("");
     setSuccessMsg("");
 
+    // Validation
     if (username === "") {
       setErrMsg("Username is required!");
       return;
@@ -47,7 +47,7 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      // 1. FIRST: Save to your MySQL backend (MOST IMPORTANT)
+      // Send to your backend (which saves to DB AND sends email)
       const response = await fetch("http://localhost:5000/api/contact", {
         method: "POST",
         headers: {
@@ -65,52 +65,26 @@ const Contact = () => {
       const data = await response.json();
 
       if (data.success) {
-        // 2. TRY EmailJS (optional - if it fails, still show success)
-        try {
-          const templateParams = {
-            username: username,
-            phone: phoneNumber,
-            email: email,
-            subject: subject,
-            message: message,
-          };
+        setSuccessMsg(`Thank you ${username}! Your message has been sent.`);
 
-          await emailjs.send(
-            "service_2o2uq7f",
-            "template_ty7chfm",
-            templateParams,
-            "hsYTzVeqACb-OoHY1",
-          );
-
-          // EmailJS succeeded
-          setSuccessMsg(
-            `Thank you ${username}! Message sent successfully!.`,
-          );
-        } catch (emailError) {
-          // EmailJS failed but backend succeeded
-          console.log("EmailJS error (optional):", emailError);
-          setSuccessMsg(
-            `Thank you ${username}! Message saved successfully. (Email notification skipped)`,
-          );
-        }
-
-        // Clear form regardless of EmailJS
+        // Clear form
         setUsername("");
         setPhoneNumber("");
         setEmail("");
         setSubject("");
         setMessage("");
       } else {
-        throw new Error(data.error || "Failed to save");
+        throw new Error(data.error || "Failed to send");
       }
     } catch (error) {
-      console.error("Backend Error:", error);
+      console.error("Error:", error);
       setErrMsg("Failed to send message. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
 
+  // Rest of your JSX remains exactly the same...
   return (
     <section
       id="contact"
@@ -209,10 +183,6 @@ const Contact = () => {
                   {loading ? "Sending..." : "Send Message"}
                 </button>
               </div>
-              <p className="text-xs text-gray-500 text-center">
-                Note: Message will be saved to database. Email notification is
-                optional.
-              </p>
             </form>
           </div>
         </div>
