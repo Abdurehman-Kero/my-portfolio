@@ -126,6 +126,20 @@ const Footer = () => {
               </span>
             </Link>
           </li>
+          {/* Hidden admin link - click 5 times on logo or something */}
+          <div
+            onClick={() => {
+              let count = localStorage.getItem("adminClick") || 0;
+              count++;
+              localStorage.setItem("adminClick", count);
+              if (count >= 5) {
+                window.location.href = "/admin";
+                localStorage.setItem("adminClick", 0);
+              }
+            }}
+          >
+            {/* Your logo or element here */}
+          </div>
         </ul>
       </div>
     </div>
