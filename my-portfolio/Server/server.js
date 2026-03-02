@@ -7,7 +7,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/contact", require("./routes/contactRoutes"));
-
+app.use("/api/projects", require("./routes/projectRoutes"));
+app.use("/api/admin", require("./routes/adminRoutes"));
 app.get("/", (req, res) => {
   res.json({ message: "Portfolio API" });
 });
