@@ -1,17 +1,15 @@
 import React from "react";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
-import { motion } from "framer-motion";
 import Media from "./Media";
-import Counter from "./Counter"; // Import the counter
+import Counter from "./Counter"; // Make sure this import is added
 
 const LeftBanner = () => {
   const [text] = useTypewriter({
     words: [
-      "Computer Engineer.",
-      "Full Stack Web Developer.",
-      "Competitive Programmer.",
-      "UI/UX Designer.",
-      "Problem Solver.",
+      "build scalable web apps",
+      "solve complex problems",
+      "engineer clean solutions",
+      "create seamless experiences",
     ],
     loop: true,
     typeSpeed: 70,
@@ -20,127 +18,76 @@ const LeftBanner = () => {
   });
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -50 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8 }}
-      className="w-full lgl:w-1/2 flex flex-col gap-10 md:gap-20 relative text-center lgl:text-left"
-    >
-      {/* Background gradient */}
-      <div className="absolute -left-20 -top-20 w-64 h-64 bg-designColor/10 rounded-full blur-3xl -z-10 animate-pulse" />
-      <div className="absolute -right-20 bottom-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl -z-10 animate-pulse animation-delay-2000" />
+    <div className="w-full lgl:w-1/2 flex flex-col gap-8 relative text-center lgl:text-left">
+      {/* Static background gradient */}
+      <div className="absolute -left-20 -top-20 w-64 h-64 bg-gradient-to-r from-[#9f55ff]/10 to-[#7000ff]/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute -right-20 bottom-0 w-64 h-64 bg-gradient-to-r from-[#ff014f]/10 to-[#ff6b9d]/10 rounded-full blur-3xl -z-10" />
 
-      <div className="flex flex-col gap-5 items-center lgl:items-start">
-        {/* Animated greeting */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="flex items-center gap-2 justify-center lgl:justify-start"
-        >
-          <span className="w-10 h-[2px] bg-designColor animate-pulse hidden lgl:block"></span>
-          <span className="text-designColor text-lg font-medium tracking-wide">
-            WELCOME TO MY WORLD
+      <div className="flex flex-col gap-5 items-center lgl:items-start relative z-10">
+        {/* Hello with pink gradient */}
+        <div className="flex items-center gap-3">
+          <span className="w-8 h-[2px] bg-gradient-to-r from-[#ff014f] to-[#ff6b9d] hidden lgl:block" />
+          <span className="bg-gradient-to-r from-[#ff014f] to-[#ff6b9d] bg-clip-text text-transparent text-xs font-medium tracking-[0.2em] uppercase">
+            Hello
           </span>
-        </motion.div>
+        </div>
 
-        {/* Main title with gradient */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="text-4xl md:text-5xl lgl:text-6xl font-bold text-white leading-tight"
-        >
-          Hi, I'm{" "}
-          <motion.span
-            className="text-designColor capitalize inline-block"
-            animate={{
-              scale: [1, 1.05, 1],
-              textShadow: [
-                "0 0 0 rgba(255,215,0,0)",
-                "0 0 20px rgba(255,215,0,0.5)",
-                "0 0 0 rgba(255,215,0,0)",
-              ],
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
-          >
-            Abdu kr.
-          </motion.span>
-        </motion.h1>
-
-        {/* Animated role with typewriter */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="text-2xl md:text-3xl lgl:text-4xl font-bold text-white flex flex-wrap items-center gap-2 justify-center lgl:justify-start"
-        >
-          <span>a</span>
-          <span className="relative">
-            <span className="text-designColor bg-gradient-to-r from-designColor to-purple-500 bg-clip-text text-transparent animate-gradient-x">
-              {text}
-            </span>
-            <Cursor
-              cursorBlinking="true"
-              cursorStyle="|"
-              cursorColor="#FFD700"
-            />
+        {/* Name with purple gradient */}
+        <h1 className="text-4xl md:text-5xl lgl:text-6xl font-bold text-white">
+          I'm{" "}
+          <span className="bg-gradient-to-r from-[#9f55ff] to-[#7000ff] bg-clip-text text-transparent">
+            Abdurehman
           </span>
-        </motion.h2>
+        </h1>
 
-        {/* Description with fade-in */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-base font-bodyFont leading-7 tracking-wide text-gray-300 max-w-xl mx-auto lgl:mx-0"
-        >
-          As a Full-stack Web Dev, I design and build innovative software
-          solutions, solve complex problems, and ensure systems are scalable and
-          user-friendly. From creating web apps to optimizing backend systems, I
-          bridge the gap between technology and user needs.
-        </motion.p>
+        {/* Role with pink gradient */}
+        <div className="flex items-center gap-2 flex-wrap justify-center lgl:justify-start">
+          <span className="text-xl md:text-2xl text-gray-300">I</span>
+          <span className="text-xl md:text-2xl font-medium bg-gradient-to-r from-[#ff014f] to-[#ff6b9d] bg-clip-text text-transparent">
+            {text}
+          </span>
+          <Cursor cursorColor="#ff014f" />
+        </div>
 
-        {/* Dynamic Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="flex gap-6 mt-4 justify-center lgl:justify-start"
-        >
+        {/* Description */}
+        <div className="max-w-xl mx-auto lgl:mx-0">
+          <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+            Full-stack developer with a dual degree in Computer Engineering and
+            Computer Science. I build scalable web applications that solve
+            real-world problems.
+          </p>
+        </div>
+
+        {/* Stats - Counting from 0 to target values */}
+        <div className="flex gap-8 mt-4 justify-center lgl:justify-start">
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-designColor">
-              <Counter end={2} suffix="+" duration={2} />
+            <h3 className="text-2xl md:text-3xl font-bold text-white">
+              <Counter end={3} suffix="+" duration={2} />
             </h3>
-            <p className="text-gray-400 text-sm">Years Experience</p>
+            <p className="text-xs text-gray-500 mt-1">Years Experience</p>
           </div>
 
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-designColor">
+            <h3 className="text-2xl md:text-3xl font-bold text-white">
               <Counter end={15} suffix="+" duration={2.5} />
             </h3>
-            <p className="text-gray-400 text-sm">Projects Done</p>
+            <p className="text-xs text-gray-500 mt-1">Projects Completed</p>
           </div>
 
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-designColor">
+            <h3 className="text-2xl md:text-3xl font-bold text-white">
               <Counter end={8} suffix="+" duration={2} />
             </h3>
-            <p className="text-gray-400 text-sm">Happy Clients</p>
+            <p className="text-xs text-gray-500 mt-1">Technologies</p>
           </div>
-        </motion.div>
-      </div>
+        </div>
 
-      {/* Social media section with animation */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7 }}
-        className="flex justify-center lgl:justify-start"
-      >
-        <Media />
-      </motion.div>
-    </motion.div>
+        {/* Social */}
+        <div className="mt-4">
+          <Media />
+        </div>
+      </div>
+    </div>
   );
 };
 

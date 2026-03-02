@@ -7,18 +7,27 @@ const Education = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.5 } }}
-      className="w-full flex flex-col lgl:flex-row gap-10 lgl:gap-20"
+      className="w-full flex flex-col lgl:flex-row gap-10 lgl:gap-20 relative"
     >
+      {/* Background gradient orbs */}
+      <div className="absolute top-0 left-0 w-64 h-64 bg-gradient-to-r from-[#9f55ff]/10 to-[#7000ff]/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-0 right-0 w-64 h-64 bg-gradient-to-r from-[#ff014f]/10 to-[#ff6b9d]/10 rounded-full blur-3xl -z-10" />
+
       {/* Left Column - Education */}
       <div className="w-full lgl:w-1/2">
         <div className="py-6 lgl:py-12 font-titleFont flex flex-col gap-4">
-          <p className="text-sm text-designColor tracking-[4px] uppercase">
-            2012 - 2027
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold">Education</h2>
+          <div className="flex items-center gap-3">
+            <span className="w-8 h-[2px] bg-gradient-to-r from-[#ff014f] to-[#ff6b9d]" />
+            <p className="text-sm text-gray-400 tracking-[4px] uppercase">
+              2012 - 2027
+            </p>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#9f55ff] to-[#7000ff] bg-clip-text text-transparent">
+            Education
+          </h2>
         </div>
 
-        <div className="mt-6 lgl:mt-14 w-full border-l-[6px] border-l-black border-opacity-30 flex flex-col gap-10">
+        <div className="mt-6 lgl:mt-14 w-full border-l-[6px] border-l-gradient-to-b from-[#9f55ff] via-[#ff014f] to-[#7000ff] border-opacity-30 flex flex-col gap-10 pl-6">
           <ResumeCard
             title="BSc in Electrical & Computer Engineering (Computer Stream)"
             subTitle="Addis Ababa University | 2023 - 2027"
@@ -50,13 +59,18 @@ const Education = () => {
 
         {/* Languages Section */}
         <div className="py-6 lgl:py-12 font-titleFont flex flex-col gap-4">
-          <p className="text-sm text-designColor tracking-[4px] uppercase">
-            Languages
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold">Linguistic Skills</h2>
+          <div className="flex items-center gap-3">
+            <span className="w-8 h-[2px] bg-gradient-to-r from-[#ff014f] to-[#ff6b9d]" />
+            <p className="text-sm text-gray-400 tracking-[4px] uppercase">
+              Languages
+            </p>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#9f55ff] to-[#7000ff] bg-clip-text text-transparent">
+            Linguistic Skills
+          </h2>
         </div>
 
-        <div className="mt-6 lgl:mt-14 w-full border-l-[6px] border-l-black border-opacity-30 flex flex-col gap-6">
+        <div className="mt-6 lgl:mt-14 w-full border-l-[6px] border-l-gradient-to-b from-[#9f55ff] via-[#ff014f] to-[#7000ff] border-opacity-30 flex flex-col gap-6 pl-6">
           <ResumeCard
             title="English"
             subTitle="Professional Working Proficiency"
@@ -81,13 +95,18 @@ const Education = () => {
       {/* Right Column - Certifications & Experience */}
       <div className="w-full lgl:w-1/2">
         <div className="py-6 lgl:py-12 font-titleFont flex flex-col gap-4">
-          <p className="text-sm text-designColor tracking-[4px] uppercase">
-            2023 - Present
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold">Certifications</h2>
+          <div className="flex items-center gap-3">
+            <span className="w-8 h-[2px] bg-gradient-to-r from-[#ff014f] to-[#ff6b9d]" />
+            <p className="text-sm text-gray-400 tracking-[4px] uppercase">
+              2023 - Present
+            </p>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#9f55ff] to-[#7000ff] bg-clip-text text-transparent">
+            Certifications
+          </h2>
         </div>
 
-        <div className="mt-6 lgl:mt-14 w-full border-l-[6px] border-l-black border-opacity-30 flex flex-col gap-6">
+        <div className="mt-6 lgl:mt-14 w-full border-l-[6px] border-l-gradient-to-b from-[#9f55ff] via-[#ff014f] to-[#7000ff] border-opacity-30 flex flex-col gap-6 pl-6">
           <ResumeCard
             title="Full Stack Web Development (MERN) Program"
             subTitle="Evangadi Tech | 2025 - 2026"
@@ -115,16 +134,21 @@ const Education = () => {
 
         {/* Experience Section */}
         <div className="py-6 lgl:py-12 font-titleFont flex flex-col gap-4">
-          <p className="text-sm text-designColor tracking-[4px] uppercase">
-            Experience
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold">Work Experience</h2>
+          <div className="flex items-center gap-3">
+            <span className="w-8 h-[2px] bg-gradient-to-r from-[#ff014f] to-[#ff6b9d]" />
+            <p className="text-sm text-gray-400 tracking-[4px] uppercase">
+              Experience
+            </p>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#9f55ff] to-[#7000ff] bg-clip-text text-transparent">
+            A quick recap of the journey so far.
+          </h2>
         </div>
 
-        <div className="mt-6 lgl:mt-14 w-full border-l-[6px] border-l-black border-opacity-30 flex flex-col gap-6">
+        <div className="mt-6 lgl:mt-14 w-full border-l-[6px] border-l-gradient-to-b from-[#9f55ff] via-[#ff014f] to-[#7000ff] border-opacity-30 flex flex-col gap-6 pl-6">
           <ResumeCard
             title="Full Stack Web Development Intern"
-            subTitle="Future Interns · Remote | 2026 "
+            subTitle="Future Interns · Remote | 2026"
             result="3 mos"
             des="Selected for remote internship program. Building real-world web applications using React, Node.js, Express, and modern development workflows with Git and GitHub."
           />

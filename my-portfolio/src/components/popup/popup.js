@@ -19,30 +19,35 @@ const PopUp = () => {
     setCurrentDate(formattedDate);
 
     // Dates to check
-    const newYear = new Date(today.getFullYear(), 8, 11); // Semptember 11
+    const newYear = new Date(today.getFullYear(), 8, 11); // September 11
     const christmas = new Date(today.getFullYear(), 11, 25); // December 25
- const myBirthday = new Date(today.getFullYear(), 0, 11);
-
+    const myBirthday = new Date(today.getFullYear(), 0, 11); // January 11
 
     // Check conditions
     if (
       today.getDate() === newYear.getDate() &&
       today.getMonth() === newYear.getMonth()
     ) {
-      setAlertMessage("🌻🌻🌻 መልካም አዲስ አመት Happy new year for all Ethiopians!🌻🌻🌻");
+      setAlertMessage(
+        "🌻🌻🌻 መልካም አዲስ አመት Happy new year for all Ethiopians! 🌻🌻🌻",
+      );
     } else if (
       today.getDate() === christmas.getDate() &&
       today.getMonth() === christmas.getMonth()
     ) {
-      setAlertMessage("🎄🎅🎅🎄");
+      setAlertMessage(
+        "🎄🎅✨ Wishing you a season filled with joy and code that compiles on the first try! 🎅🎄✨",
+      );
     } else if (
       today.getDate() === myBirthday.getDate() &&
       today.getMonth() === myBirthday.getMonth()
     ) {
-      setAlertMessage("🎂🎉🎈 Guess who’s leveling up today? Yep, it’s me! Happy Birthday to this awesome coder!");
+      setAlertMessage(
+        "🎂🎉🎈 Guess who's leveling up today? Yep, it's me! Happy Birthday to this awesome coder! 🎈🎉🎂",
+      );
     } else {
       setAlertMessage(
-        "🌟 Wishing you a day where things actually get done and the vibes stay immaculate!",
+        "✨ Wishing you a day where things actually get done and the vibes stay immaculate! ✨",
       );
     }
   }, []);

@@ -139,3 +139,17 @@
   background-size: 200% 200%;
   animation: gradient-xy 3s ease infinite;
 }
+/* Active link styling with pink gradient */
+.active {
+  background: linear-gradient(90deg, #ff014f, #ff6b9d) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* For any underline or border on active state */
+.active::after,
+.active .nav-underline {
+  background: linear-gradient(90deg, #ff014f, #ff6b9d) !important;
+}

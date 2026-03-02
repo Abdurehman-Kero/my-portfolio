@@ -21,7 +21,7 @@ const Media = () => {
       {/* Social Links Section */}
       <div className="w-full lgl:w-auto">
         <h2 className="text-sm uppercase font-titleFont mb-4 text-gray-400 tracking-wider">
-          Connect With Me
+          Let's Talk
         </h2>
         <div className="flex gap-3">
           <a
@@ -67,10 +67,7 @@ const Media = () => {
       </div>
 
       {/* Download CV Section */}
-      <div className="w-full lgl:w-auto">
-        <h2 className="text-sm uppercase font-titleFont mb-4 text-gray-400 tracking-wider">
-          Download Resume
-        </h2>
+      <div className="mb-4 pt-12 w-full lgl:w-auto">
         <button
           onClick={handleDownload}
           className="group relative overflow-hidden px-6 py-3 bg-gradient-to-r from-designColor/20 to-transparent border border-designColor/30 rounded-lg hover:border-designColor transition-all duration-300 hover:shadow-lg hover:shadow-designColor/20"
