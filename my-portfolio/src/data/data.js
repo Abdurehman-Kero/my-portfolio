@@ -1,30 +1,50 @@
-import { FaDatabase, FaGlobe, FaTools, FaPencilAlt, FaLightbulb, FaMobileAlt } from "react-icons/fa";
+import {
+  FaDatabase,
+  FaGlobe,
+  FaTools,
+  FaPencilAlt,
+  FaRocket,
+  FaShieldAlt,
+  FaCode,
+  FaCloud,
+} from "react-icons/fa";
 
 // Features Data
 export const featuresData = [
   {
     id: 1,
-    icon: <FaGlobe />,
+    icon: <FaGlobe className="text-3xl" />,
     title: "Web Application Development",
-    des: "I develop responsive web applications that combine intuitive front-end interfaces with efficient back-end logic, ensuring user-friendly and visually appealing solutions.",
+    des: "Responsive full-stack applications with intuitive interfaces and efficient back-end logic, delivering user-friendly and visually appealing solutions.",
   },
   {
     id: 2,
-    icon: <FaDatabase />,
+    icon: <FaDatabase className="text-3xl" />,
     title: "Database Management",
-    des: "I design and optimize scalable databases to handle complex queries and large data sets, ensuring secure and reliable data storage and retrieval.",
+    des: "Scalable database design and optimization for complex queries and large datasets, ensuring secure and reliable data storage and retrieval.",
   },
   {
     id: 3,
-    icon: <FaTools />,
-    title: "API Development and Integration",
-    des: "I create robust APIs for seamless communication between services and integrate third-party APIs to add advanced functionalities like payments and analytics.",
+    icon: <FaTools className="text-3xl" />,
+    title: "API Development & Integration",
+    des: "Robust RESTful APIs for seamless service communication and third-party integrations for payments, analytics, and advanced functionalities.",
   },
-  
+  {
+    id: 4,
+    icon: <FaPencilAlt className="text-3xl" />,
+    title: "UI/UX Design",
+    des: "User-centric designs prioritizing usability and aesthetics, creating seamless and engaging experiences for application users.",
+  },
+  {
+    id: 5,
+    icon: <FaRocket className="text-3xl" />,
+    title: "Performance Optimization",
+    des: "Code splitting, lazy loading, and caching strategies to ensure lightning-fast load times and smooth user experiences.",
+  },
   {
     id: 6,
-    icon: <FaPencilAlt />,
-    title: "UI/UX Design",
-    des: "I create user-centric designs that prioritize usability and aesthetics, ensuring a seamless and engaging experience for application users.",
+    icon: <FaCloud className="text-3xl" />,
+    title: "Cloud Deployment",
+    des: "Seamless deployment and scaling on cloud platforms like AWS, Vercel, and Netlify with CI/CD pipelines for automated updates.",
   },
 ];

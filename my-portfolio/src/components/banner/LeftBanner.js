@@ -2,14 +2,15 @@ import React from "react";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 import Media from "./Media";
+import Counter from "./Counter"; // Import the counter
 
 const LeftBanner = () => {
   const [text] = useTypewriter({
     words: [
-      "Software Engineer.",
-      "Full Stack Developer.",
+      "Computer Engineer.",
+      "Full Stack Web Developer.",
       "Competitive Programmer.",
-      "UI/UX Enthusiast.",
+      "UI/UX Designer.",
       "Problem Solver.",
     ],
     loop: true,
@@ -39,7 +40,7 @@ const LeftBanner = () => {
         >
           <span className="w-10 h-[2px] bg-designColor animate-pulse hidden lgl:block"></span>
           <span className="text-designColor text-lg font-medium tracking-wide">
-            WELCOME TO MY PORTFOLIO
+            WELCOME TO MY WORLD
           </span>
         </motion.div>
 
@@ -100,7 +101,7 @@ const LeftBanner = () => {
           bridge the gap between technology and user needs.
         </motion.p>
 
-        {/* Stats or highlights */}
+        {/* Dynamic Stats Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -108,15 +109,23 @@ const LeftBanner = () => {
           className="flex gap-6 mt-4 justify-center lgl:justify-start"
         >
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-designColor">2+</h3>
+            <h3 className="text-2xl font-bold text-designColor">
+              <Counter end={2} suffix="+" duration={2} />
+            </h3>
             <p className="text-gray-400 text-sm">Years Experience</p>
           </div>
+
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-designColor">15+</h3>
+            <h3 className="text-2xl font-bold text-designColor">
+              <Counter end={15} suffix="+" duration={2.5} />
+            </h3>
             <p className="text-gray-400 text-sm">Projects Done</p>
           </div>
+
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-designColor">8+</h3>
+            <h3 className="text-2xl font-bold text-designColor">
+              <Counter end={8} suffix="+" duration={2} />
+            </h3>
             <p className="text-gray-400 text-sm">Happy Clients</p>
           </div>
         </motion.div>
