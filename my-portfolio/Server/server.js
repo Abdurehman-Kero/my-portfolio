@@ -8,7 +8,10 @@ app.use(express.json());
 
 app.use("/api/contact", require("./routes/contactRoutes"));
 app.use("/api/projects", require("./routes/projectRoutes"));
+app.use("/api/testimonials", require("./routes/testimonialRoutes")); // Add this line
+
 app.use("/api/admin", require("./routes/adminRoutes"));
+app.use("/api/testimonials", require("./routes/testimonialRoutes"));
 app.get("/", (req, res) => {
   res.json({ message: "Portfolio API" });
 });
