@@ -6,8 +6,8 @@ const LeftBanner = () => {
     const [text] = useTypewriter({
       words: ["Software Engineer.", "Full Stack Developer.", "Competitive Programmer."],
       loop: true,
-      typeSpeed: 20,
-      deleteSpeed: 10,
+      typeSpeed: 90,
+      deleteSpeed: 40,
       delaySpeed: 2000,
     });
   return (
