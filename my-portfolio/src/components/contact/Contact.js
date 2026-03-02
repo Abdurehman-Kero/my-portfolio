@@ -4,9 +4,7 @@ import ContactLeft from "./ContactLeft";
 
 const Contact = () => {
   const [username, setUsername] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
@@ -23,21 +21,14 @@ const Contact = () => {
     setErrMsg("");
     setSuccessMsg("");
 
-    // Validation
     if (username === "") {
-      setErrMsg("Username is required!");
-      return;
-    } else if (phoneNumber === "") {
-      setErrMsg("Phone number is required!");
+      setErrMsg("Name is required!");
       return;
     } else if (email === "") {
       setErrMsg("Please provide your Email!");
       return;
     } else if (!emailValidation(email)) {
       setErrMsg("Provide a valid Email!");
-      return;
-    } else if (subject === "") {
-      setErrMsg("Subject is required!");
       return;
     } else if (message === "") {
       setErrMsg("Message is required!");
@@ -47,7 +38,6 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      // Send to your backend (which saves to DB AND sends email)
       const response = await fetch("http://localhost:5000/api/contact", {
         method: "POST",
         headers: {
@@ -56,8 +46,6 @@ const Contact = () => {
         body: JSON.stringify({
           name: username,
           email: email,
-          phone: phoneNumber,
-          subject: subject,
           message: message,
         }),
       });
@@ -66,12 +54,8 @@ const Contact = () => {
 
       if (data.success) {
         setSuccessMsg(`Thank you ${username}! Your message has been sent.`);
-
-        // Clear form
         setUsername("");
-        setPhoneNumber("");
         setEmail("");
-        setSubject("");
         setMessage("");
       } else {
         throw new Error(data.error || "Failed to send");
@@ -84,105 +68,97 @@ const Contact = () => {
     }
   };
 
-  // Rest of your JSX remains exactly the same...
   return (
     <section
       id="contact"
-      className="w-full py-12 border-b-[1px] border-b-black"
+      className="w-full py-20 border-b-[1px] border-b-gray-800"
     >
-      <div className="flex justify-center items-center text-center">
-        <Title title="CONTACT" des="Contact With Me" />
+      <div className="flex justify-center items-center text-center mb-16">
+        <Title title="CONTACT" des="Get In Touch" />
       </div>
-      <div className="w-full">
-        <div className="w-full h-auto flex flex-col lgl:flex-row justify-between">
+
+      <div className="w-full max-w-6xl mx-auto px-4">
+        <div className="w-full flex flex-col lgl:flex-row gap-8">
+          {/* Contact Left Section */}
           <ContactLeft />
-          <div className="w-full lgl:w-[60%] h-full py-10 bg-gradient-to-r from-[#1e2024] to-[#23272b] flex flex-col gap-8 p-4 lgl:p-8 rounded-lg shadow-shadowOne">
-            <form
-              className="w-full flex flex-col gap-4 lgl:gap-6 py-2 lgl:py-5"
-              onSubmit={handleSend}
-            >
+
+          {/* Contact Form */}
+          <div className="w-full lgl:w-[60%] bg-gradient-to-br from-[#1e2024] to-[#23272b] p-8 rounded-2xl shadow-shadowOne border border-gray-800/50">
+            <form className="w-full flex flex-col gap-8" onSubmit={handleSend}>
+              {/* Status Messages */}
               {errMsg && (
-                <p className="py-3 text-orange-500 text-base text-center">
-                  {errMsg}
-                </p>
+                <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
+                  <p className="text-red-500 text-sm text-center">{errMsg}</p>
+                </div>
               )}
               {successMsg && (
-                <p className="py-3 text-green-500 text-base text-center">
-                  {successMsg}
-                </p>
+                <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
+                  <p className="text-green-500 text-sm text-center">
+                    {successMsg}
+                  </p>
+                </div>
               )}
-              <div className="w-full flex flex-col lgl:flex-row gap-10">
-                <div className="w-full lgl:w-1/2 flex flex-col gap-4">
-                  <p className="text-sm text-gray-400 uppercase tracking-wide">
-                    Your name
-                  </p>
-                  <input
-                    onChange={(e) => setUsername(e.target.value)}
-                    value={username}
-                    className="contactInput"
-                    type="text"
-                    required
-                  />
-                </div>
-                <div className="w-full lgl:w-1/2 flex flex-col gap-4">
-                  <p className="text-sm text-gray-400 uppercase tracking-wide">
-                    Phone Number
-                  </p>
-                  <input
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    value={phoneNumber}
-                    className="contactInput"
-                    type="text"
-                    required
-                  />
-                </div>
+
+              {/* Name Field */}
+              <div className="w-full">
+                <label className="text-sm text-gray-400 mb-2 block">Name</label>
+                <input
+                  onChange={(e) => setUsername(e.target.value)}
+                  value={username}
+                  className="w-full h-14 px-4 bg-transparent border-b border-gray-700 text-gray-300 focus:outline-none focus:border-[#ff014f] transition-colors duration-300"
+                  type="text"
+                  required
+                  placeholder="Your name"
+                />
               </div>
-              <div className="flex flex-col gap-4">
-                <p className="text-sm text-gray-400 uppercase tracking-wide">
+
+              {/* Email Field */}
+              <div className="w-full">
+                <label className="text-sm text-gray-400 mb-2 block">
                   Email
-                </p>
+                </label>
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
-                  className="contactInput"
+                  className="w-full h-14 px-4 bg-transparent border-b border-gray-700 text-gray-300 focus:outline-none focus:border-[#ff014f] transition-colors duration-300"
                   type="email"
                   required
+                  placeholder="your@email.com"
                 />
               </div>
-              <div className="flex flex-col gap-4">
-                <p className="text-sm text-gray-400 uppercase tracking-wide">
-                  Subject
-                </p>
-                <input
-                  onChange={(e) => setSubject(e.target.value)}
-                  value={subject}
-                  className="contactInput"
-                  type="text"
-                  required
-                />
-              </div>
-              <div className="flex flex-col gap-4">
-                <p className="text-sm text-gray-400 uppercase tracking-wide">
+
+              {/* Message Field */}
+              <div className="w-full">
+                <label className="text-sm text-gray-400 mb-2 block">
                   Message
-                </p>
+                </label>
                 <textarea
                   onChange={(e) => setMessage(e.target.value)}
                   value={message}
-                  className="contactTextArea"
-                  cols="30"
-                  rows="8"
+                  className="w-full px-4 py-3 bg-transparent border-b border-gray-700 text-gray-300 focus:outline-none focus:border-[#ff014f] transition-colors duration-300 resize-none"
+                  rows="4"
                   required
-                ></textarea>
+                  placeholder="Your message..."
+                />
               </div>
-              <div className="w-full">
+
+              {/* Submit Button */}
+              <div className="w-full pt-4">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full h-12 bg-[#141518] rounded-lg text-base text-gray-400 uppercase hover:text-white duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="group relative w-full h-14 bg-gradient-to-r from-[#ff014f] to-[#ff6b9d] text-white rounded-lg font-medium tracking-wide overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#ff014f]/20 transition-all duration-300"
                 >
-                  {loading ? "Sending..." : "Send Message"}
+                  <span className="relative z-10">
+                    {loading ? "Sending..." : "Send ->"}
+                  </span>
                 </button>
               </div>
+
+              {/* Form note */}
+              <p className="text-xs text-gray-500 text-center mt-2">
+                I'll get back to you within 24-48 hours
+              </p>
             </form>
           </div>
         </div>
