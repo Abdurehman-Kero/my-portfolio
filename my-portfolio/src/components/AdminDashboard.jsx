@@ -1,6 +1,7 @@
-// src/components/AdminDashboard.jsx
-import React, { useState, useEffect } from "react";
 
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // Add this line
+import * as projectImages from "../assets/index";
 const AdminDashboard = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [projects, setProjects] = useState([]);
@@ -222,12 +223,24 @@ const AdminDashboard = () => {
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-white">Admin Dashboard</h1>
-          <a
-            href="/"
-            className="bg-designColor text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition duration-300"
-          >
-            View Portfolio
-          </a>
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-4xl px-2 font-bold text-white">Manage Projects </h1>
+            <div className="flex gap-4">
+              <Link
+                to="/admin"
+                className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 flex items-center gap-2"
+              >
+                ← Back to Dashboard
+              </Link>
+              <a
+                href="/"
+                className="bg-designColor text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition duration-300"
+              >
+                View Portfolio
+              </a>
+            </div>
+          </div>
+     
         </div>
 
         {/* Add/Edit Project Form */}

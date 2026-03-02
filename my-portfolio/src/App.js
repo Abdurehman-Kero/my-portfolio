@@ -9,9 +9,10 @@ import Navbar from "./components/navbar/Navbar";
 import Projects from "./components/projects/Projects";
 import Resume from "./components/resume/Resume";
 import Sidebar from "./components/banner/stats";
+import AdminMain from "./components/AdminMain";
 import AdminDashboard from "./components/AdminDashboard";
-
-// import Testimonial from "./components/tesimonial/Testimonial";
+import Testimonials from "./components/tesimonial/Testimonial";
+import AdminTestimonials from "./components/AdminTestimonials";
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
                 <Features />
                 <Projects />
                 <Resume />
-                {/* <Testimonial /> */}
+                <Testimonials />
                 <Contact />
                 <Footer />
                 <FooterBottom />
@@ -38,8 +39,14 @@ function App() {
           }
         />
 
-        {/* Admin Route */}
-        <Route path="/admin" element={<AdminDashboard />} />
+        {/* Admin Main Dashboard */}
+        <Route path="/admin" element={<AdminMain />} />
+
+        {/* Admin Projects */}
+        <Route path="/admin/projects" element={<AdminDashboard />} />
+
+        {/* Admin Testimonials */}
+        <Route path="/admin/testimonials" element={<AdminTestimonials />} />
       </Routes>
     </BrowserRouter>
   );
