@@ -1,37 +1,32 @@
-import React from 'react'
-import { HiArrowRight } from "react-icons/hi";
+import React from "react";
+import { motion } from "framer-motion";
 
-const Card = ({item:{title,des,icon}}) => {
+const Card = ({ item }) => {
   return (
-    <div className="w-full px-12 h-80 py-10 rounded-lg shadow-shadowOne flex items-center bg-gradient-to-r from-bodyColor to-[#202327] group hover:bg-gradient-to-b hover:from-black hover:to-[#1e2024] transition-colors duration-100 group">
-      <div className="h-72 overflow-y-hidden">
-        <div className="flex h-full flex-col gap-10 translate-y-16 group-hover:translate-y-0 transition-transform duration-500">
-          <div className="w-10 h-8 flex flex-col justify-between">
-        
-            {icon ? (
-              <span className="text-5xl text-designColor">{icon}</span>
-            ) : (
-              <>
-                <span className="w-full h-[2px] rounded-lg bg-designColor inline-flex"></span>
-                <span className="w-full h-[2px] rounded-lg bg-designColor inline-flex"></span>
-                <span className="w-full h-[2px] rounded-lg bg-designColor inline-flex"></span>
-                <span className="w-full h-[2px] rounded-lg bg-designColor inline-flex"></span>
-              </>
-            )}
-          </div>
-          <div className="flex flex-col gap-6">
-            <h2 className="text-xl md:text-2xl font-titleFont font-bold text-gray-300">
-              {title}
-            </h2>
-            <p className="base">{des}</p>
-            <span className="text-2xl text-designColor">
-              <HiArrowRight />
-            </span>
-          </div>
-        </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ y: -8 }}
+      className="group relative bg-gradient-to-br from-[#1e2024] to-[#23272b] p-6 rounded-xl border border-gray-800 hover:border-designColor/50 transition-all duration-300 hover:shadow-xl hover:shadow-designColor/10"
+    >
+      {/* Icon Container */}
+      <div className="w-16 h-16 mb-5 rounded-lg bg-gradient-to-br from-designColor/10 to-transparent flex items-center justify-center text-designColor group-hover:scale-110 transition-transform duration-300">
+        {item.icon}
       </div>
-    </div>
-  );
-}
 
-export default Card
+      {/* Title */}
+      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-designColor transition-colors duration-300">
+        {item.title}
+      </h3>
+
+      {/* Description */}
+      <p className="text-gray-400 text-sm leading-relaxed">{item.des}</p>
+
+      {/* Bottom Gradient Line */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 group-hover:w-1/2 h-[2px] bg-gradient-to-r from-transparent via-designColor to-transparent transition-all duration-500" />
+    </motion.div>
+  );
+};
+
+export default Card;
