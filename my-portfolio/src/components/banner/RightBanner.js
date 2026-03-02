@@ -1,17 +1,17 @@
-import React from 'react'
+import React from "react";
 import { bannerImg } from "../../assets/index";
 
 const RightBanner = () => {
   return (
     <div className="w-full lgl:w-1/2 flex justify-center items-center relative">
+      {/* Image with reduced opacity border */}
       <img
-        className="w-[auto] h-[auto] border-none z-10"
+        className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] rounded-full object-cover border-4 border-designColor/30 shadow-2xl"
         src={bannerImg}
         alt="bannerImg"
       />
-      <div className="absolute w-[0] h-[0] md:w-[446px] md:h-[446px] bg-gradient-to-r from-designColor to-[#1e2024] shadow-shadowOne flex justify-center items-center  rounded-full" />
-   </div>
+    </div>
   );
-}
+};
 
-export default RightBanner
+export default RightBanner;
