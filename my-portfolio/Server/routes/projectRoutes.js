@@ -10,6 +10,7 @@ router.get("/", async (req, res) => {
     );
     res.json(projects);
   } catch (error) {
+    console.error("Error fetching projects:", error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -26,54 +27,115 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// POST create new project (admin only)
+// POST create new project
 router.post("/", async (req, res) => {
-  const { title, description, image, link1, link2, category, featured } =
-    req.body;
+  const {
+    title,
+    description,
+    technologies,
+    github_url,
+    live_url,
+    image_url,
+    featured,
+  } = req.body;
+
+  // Validate required fields
+  if (!title || !description || !github_url || !live_url || !image_url) {
+    return res.status(400).json({
+      success: false,
+      error: "Missing required fields. Please fill all fields.",
+    });
+  }
 
   try {
     const [result] = await pool.query(
-      "INSERT INTO projects (title, description, image, link1, link2, category, featured) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [title, description, image, link1, link2, category, featured || false],
+      `INSERT INTO projects 
+       (title, description, technologies, github_url, live_url, image_url, featured) 
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [
+        title,
+        description,
+        technologies || null,
+        github_url,
+        live_url,
+        image_url,
+        featured ? 1 : 0,
+      ],
     );
-    res.json({ success: true, id: result.insertId });
+
+    res.json({
+      success: true,
+      id: result.insertId,
+      message: "Project added successfully!",
+    });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Database error:", error);
+    res.status(500).json({ success: false, error: error.message });
   }
 });
 
 // PUT update project
 router.put("/:id", async (req, res) => {
-  const { title, description, image, link1, link2, category, featured } =
-    req.body;
+  const {
+    title,
+    description,
+    technologies,
+    github_url,
+    live_url,
+    image_url,
+    featured,
+  } = req.body;
+  const { id } = req.params;
 
   try {
-    await pool.query(
-      "UPDATE projects SET title=?, description=?, image=?, link1=?, link2=?, category=?, featured=? WHERE id=?",
+    const [result] = await pool.query(
+      `UPDATE projects 
+       SET title = ?, description = ?, technologies = ?, github_url = ?, live_url = ?, image_url = ?, featured = ? 
+       WHERE id = ?`,
       [
         title,
         description,
-        image,
-        link1,
-        link2,
-        category,
-        featured,
-        req.params.id,
+        technologies || null,
+        github_url,
+        live_url,
+        image_url,
+        featured ? 1 : 0,
+        id,
       ],
     );
-    res.json({ success: true });
+
+    if (result.affectedRows === 0) {
+      return res
+        .status(404)
+        .json({ success: false, error: "Project not found" });
+    }
+
+    res.json({ success: true, message: "Project updated successfully!" });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Database error:", error);
+    res.status(500).json({ success: false, error: error.message });
   }
 });
 
 // DELETE project
 router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+
   try {
-    await pool.query("DELETE FROM projects WHERE id = ?", [req.params.id]);
-    res.json({ success: true });
+    const [result] = await pool.query("DELETE FROM projects WHERE id = ?", [
+      id,
+    ]);
+
+    if (result.affectedRows === 0) {
+      return res
+        .status(404)
+        .json({ success: false, error: "Project not found" });
+    }
+
+    res.json({ success: true, message: "Project deleted successfully!" });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Database error:", error);
+    res.status(500).json({ success: false, error: error.message });
   }
 });
 

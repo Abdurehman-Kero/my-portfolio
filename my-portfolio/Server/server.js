@@ -6,13 +6,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Routes
 app.use("/api/contact", require("./routes/contactRoutes"));
-app.use("/api/projects", require("./routes/projectRoutes"));
-app.use("/api/testimonials", require("./routes/testimonialRoutes")); // Add this line
-
 app.use("/api/admin", require("./routes/adminRoutes"));
-app.use("/api/experiences", require("./routes/experienceRoutes"));
+app.use("/api/projects", require("./routes/projectRoutes")); // Make sure this line exists
 app.use("/api/testimonials", require("./routes/testimonialRoutes"));
+
 app.get("/", (req, res) => {
   res.json({ message: "Portfolio API" });
 });

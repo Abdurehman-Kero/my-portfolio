@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Add this line
-import * as projectImages from "../assets/index";
+import { Link } from "react-router-dom";
+
 const AdminDashboard = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [projects, setProjects] = useState([]);
@@ -9,10 +8,10 @@ const AdminDashboard = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    image: "", // This will store the image URL
-    link1: "",
-    link2: "",
-    category: "",
+    technologies: "",
+    github_url: "",
+    live_url: "",
+    image_url: "",
     featured: false,
   });
 
@@ -32,10 +31,15 @@ const AdminDashboard = () => {
     try {
       const response = await fetch("http://localhost:5000/api/projects");
       const data = await response.json();
-      console.log("Projects from DB:", data); // Check what images are coming
-      setProjects(data);
+
+      if (Array.isArray(data)) {
+        setProjects(data);
+      } else {
+        setProjects([]);
+      }
     } catch (error) {
       console.error("Error fetching projects:", error);
+      setProjects([]);
     }
   };
 
@@ -44,9 +48,7 @@ const AdminDashboard = () => {
     try {
       const response = await fetch("http://localhost:5000/api/admin/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
       });
 
@@ -72,14 +74,24 @@ const AdminDashboard = () => {
 
   const handleLoginInputChange = (e) => {
     const { name, value } = e.target;
-    setLoginData({
-      ...loginData,
-      [name]: value,
-    });
+    setLoginData({ ...loginData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate required fields
+    if (
+      !formData.title ||
+      !formData.description ||
+      !formData.github_url ||
+      !formData.live_url ||
+      !formData.image_url
+    ) {
+      alert("Please fill all required fields");
+      return;
+    }
+
     try {
       const url = editingProject
         ? `http://localhost:5000/api/projects/${editingProject.id}`
@@ -89,9 +101,7 @@ const AdminDashboard = () => {
 
       const response = await fetch(url, {
         method: method,
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
@@ -108,16 +118,16 @@ const AdminDashboard = () => {
         setFormData({
           title: "",
           description: "",
-          image: "",
-          link1: "",
-          link2: "",
-          category: "",
+          technologies: "",
+          github_url: "",
+          live_url: "",
+          image_url: "",
           featured: false,
         });
         setEditingProject(null);
         fetchProjects();
       } else {
-        alert("Error: " + data.error);
+        alert("Error: " + (data.error || "Unknown error"));
       }
     } catch (error) {
       alert("Error saving project: " + error.message);
@@ -129,11 +139,11 @@ const AdminDashboard = () => {
     setFormData({
       title: project.title,
       description: project.description,
-      image: project.image || "",
-      link1: project.link1,
-      link2: project.link2,
-      category: project.category || "",
-      featured: project.featured || false,
+      technologies: project.technologies || "",
+      github_url: project.github_url,
+      live_url: project.live_url,
+      image_url: project.image_url,
+      featured: Boolean(project.featured),
     });
   };
 
@@ -166,10 +176,10 @@ const AdminDashboard = () => {
     setFormData({
       title: "",
       description: "",
-      image: "",
-      link1: "",
-      link2: "",
-      category: "",
+      technologies: "",
+      github_url: "",
+      live_url: "",
+      image_url: "",
       featured: false,
     });
   };
@@ -217,41 +227,38 @@ const AdminDashboard = () => {
     );
   }
 
-  // Admin Dashboard
+  const projectsArray = Array.isArray(projects) ? projects : [];
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-[#1e2024] to-[#23272b] py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold text-white">Admin Dashboard</h1>
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-4xl px-2 font-bold text-white">Manage Projects </h1>
-            <div className="flex gap-4">
-              <Link
-                to="/admin"
-                className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 flex items-center gap-2"
-              >
-                ← Back to Dashboard
-              </Link>
-              <a
-                href="/"
-                className="bg-designColor text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition duration-300"
-              >
-                View Portfolio
-              </a>
-            </div>
+          <h1 className="text-4xl font-bold text-white">Manage Projects</h1>
+          <div className="flex gap-4">
+            <Link
+              to="/admin"
+              className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition"
+            >
+              ← Back to Dashboard
+            </Link>
+            <a
+              href="/"
+              className="bg-designColor text-white px-4 py-2 rounded-lg hover:bg-opacity-80 transition"
+            >
+              View Portfolio
+            </a>
           </div>
-     
         </div>
 
         {/* Add/Edit Project Form */}
         <div className="bg-[#0B1120] p-6 rounded-lg shadow-shadowOne mb-8">
           <h2 className="text-2xl font-bold text-white mb-6">
-            {editingProject ? "Edit Project" : "Add New Project"}
+            {editingProject ? "✏️ Edit Project" : "➕ Add New Project"}
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="mb-4">
-                <label className="block text-gray-400 mb-2">Title</label>
+                <label className="block text-gray-400 mb-2">Title *</label>
                 <input
                   type="text"
                   name="title"
@@ -263,19 +270,21 @@ const AdminDashboard = () => {
               </div>
 
               <div className="mb-4">
-                <label className="block text-gray-400 mb-2">Category</label>
+                <label className="block text-gray-400 mb-2">Technologies</label>
                 <input
                   type="text"
-                  name="category"
-                  value={formData.category}
+                  name="technologies"
+                  value={formData.technologies}
                   onChange={handleInputChange}
-                  placeholder="e.g., E-commerce, Social, Clone"
+                  placeholder="React, Node.js, MongoDB"
                   className="w-full p-3 bg-[#1e2024] text-white rounded-lg border border-gray-700 focus:border-designColor outline-none"
                 />
               </div>
 
               <div className="mb-4 md:col-span-2">
-                <label className="block text-gray-400 mb-2">Description</label>
+                <label className="block text-gray-400 mb-2">
+                  Description *
+                </label>
                 <textarea
                   name="description"
                   value={formData.description}
@@ -287,27 +296,26 @@ const AdminDashboard = () => {
               </div>
 
               <div className="mb-4 md:col-span-2">
-                <label className="block text-gray-400 mb-2">Image URL</label>
+                <label className="block text-gray-400 mb-2">Image URL *</label>
                 <input
                   type="url"
-                  name="image"
-                  value={formData.image}
+                  name="image_url"
+                  value={formData.image_url}
                   onChange={handleInputChange}
-                  placeholder="https://example.com/your-image.jpg"
+                  placeholder="https://example.com/image.jpg"
                   className="w-full p-3 bg-[#1e2024] text-white rounded-lg border border-gray-700 focus:border-designColor outline-none"
                   required
                 />
               </div>
 
-              {/* Image Preview */}
-              {formData.image && (
+              {formData.image_url && (
                 <div className="mb-4 md:col-span-2">
                   <label className="block text-gray-400 mb-2">
                     Image Preview
                   </label>
                   <div className="border border-gray-700 rounded-lg p-2 bg-[#1e2024]">
                     <img
-                      src={formData.image}
+                      src={formData.image_url}
                       alt="Preview"
                       className="max-h-40 rounded-lg mx-auto"
                       onError={(e) => {
@@ -321,11 +329,11 @@ const AdminDashboard = () => {
               )}
 
               <div className="mb-4">
-                <label className="block text-gray-400 mb-2">GitHub Link</label>
+                <label className="block text-gray-400 mb-2">GitHub URL *</label>
                 <input
                   type="url"
-                  name="link1"
-                  value={formData.link1}
+                  name="github_url"
+                  value={formData.github_url}
                   onChange={handleInputChange}
                   className="w-full p-3 bg-[#1e2024] text-white rounded-lg border border-gray-700 focus:border-designColor outline-none"
                   required
@@ -334,12 +342,12 @@ const AdminDashboard = () => {
 
               <div className="mb-4">
                 <label className="block text-gray-400 mb-2">
-                  Live Demo Link
+                  Live Demo URL *
                 </label>
                 <input
                   type="url"
-                  name="link2"
-                  value={formData.link2}
+                  name="live_url"
+                  value={formData.live_url}
                   onChange={handleInputChange}
                   className="w-full p-3 bg-[#1e2024] text-white rounded-lg border border-gray-700 focus:border-designColor outline-none"
                   required
@@ -363,7 +371,7 @@ const AdminDashboard = () => {
             <div className="flex gap-4">
               <button
                 type="submit"
-                className="bg-designColor text-white px-6 py-3 rounded-lg hover:bg-opacity-80 transition duration-300"
+                className="bg-designColor text-white px-6 py-3 rounded-lg hover:bg-opacity-80 transition"
               >
                 {editingProject ? "Update Project" : "Add Project"}
               </button>
@@ -372,7 +380,7 @@ const AdminDashboard = () => {
                 <button
                   type="button"
                   onClick={handleCancelEdit}
-                  className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-opacity-80 transition duration-300"
+                  className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-opacity-80 transition"
                 >
                   Cancel Edit
                 </button>
@@ -384,51 +392,63 @@ const AdminDashboard = () => {
         {/* Projects List */}
         <div className="bg-[#0B1120] p-6 rounded-lg shadow-shadowOne">
           <h2 className="text-2xl font-bold text-white mb-6">
-            Existing Projects
+            📋 Existing Projects ({projectsArray.length})
           </h2>
-          <div className="space-y-4">
-            {projects.map((project) => (
-              <div
-                key={project.id}
-                className="flex items-center justify-between p-4 bg-[#1e2024] rounded-lg"
-              >
-                <div className="flex items-center gap-4">
-                  {project.image && (
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-16 h-16 object-cover rounded-lg"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src =
-                          "https://via.placeholder.com/64x64?text=No+Image";
-                      }}
-                    />
-                  )}
-                  <div>
-                    <h3 className="text-white font-bold">{project.title}</h3>
-                    <p className="text-gray-400 text-sm">
-                      {project.description.substring(0, 100)}...
-                    </p>
+
+          {projectsArray.length === 0 ? (
+            <p className="text-gray-400 text-center py-8">
+              No projects yet. Add your first one above!
+            </p>
+          ) : (
+            <div className="space-y-4">
+              {projectsArray.map((project) => (
+                <div
+                  key={project.id}
+                  className="flex items-center justify-between p-4 bg-[#1e2024] rounded-lg hover:bg-opacity-80 transition"
+                >
+                  <div className="flex items-center gap-4">
+                    {project.image_url && (
+                      <img
+                        src={project.image_url}
+                        alt={project.title}
+                        className="w-16 h-16 object-cover rounded-lg"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src =
+                            "https://via.placeholder.com/64x64?text=No+Image";
+                        }}
+                      />
+                    )}
+                    <div>
+                      <h3 className="text-white font-bold">{project.title}</h3>
+                      <p className="text-gray-400 text-sm">
+                        {project.description?.substring(0, 100)}...
+                      </p>
+                      {project.technologies && (
+                        <p className="text-xs text-gray-500 mt-1">
+                          Tech: {project.technologies}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleEdit(project)}
+                      className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(project.id)}
+                      className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => handleEdit(project)}
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-opacity-80"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(project.id)}
-                    className="bg-red-600 text-white px-4 py-2 rounded hover:bg-opacity-80"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
