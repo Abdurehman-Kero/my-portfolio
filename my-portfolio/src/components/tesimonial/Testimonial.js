@@ -13,12 +13,22 @@ const Testimonials = () => {
 
   const fetchTestimonials = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/testimonials");
+      const response = await fetch("https://porfoliobe.abdurehman.com/api/testimonials");
       const data = await response.json();
-      setTestimonials(data);
+      console.log("Testimonials from DB:", data);
+
+      // Ensure data is an array
+      if (Array.isArray(data)) {
+        setTestimonials(data);
+      } else {
+        console.error("API returned non-array:", data);
+        setTestimonials([]);
+      }
+
       setLoading(false);
     } catch (error) {
       console.error("Error fetching testimonials:", error);
+      setTestimonials([]);
       setLoading(false);
     }
   };
@@ -53,6 +63,9 @@ const Testimonials = () => {
     );
   }
 
+  // Safety check
+  const testimonialsArray = Array.isArray(testimonials) ? testimonials : [];
+
   return (
     <section
       id="testimonials"
@@ -70,7 +83,7 @@ const Testimonials = () => {
         {/* Gradient line separator */}
         <div className="w-24 h-1 mx-auto mb-12 bg-gradient-to-r from-[#9f55ff] via-[#ff014f] to-[#7000ff] rounded-full" />
 
-        {testimonials.length === 0 ? (
+        {testimonialsArray.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-gray-400">
               No testimonials yet. Check back soon!
@@ -78,9 +91,9 @@ const Testimonials = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 xl:gap-8 mt-10">
-            {testimonials.map((testimonial, index) => (
+            {testimonialsArray.map((testimonial, index) => (
               <motion.div
-                key={testimonial.id}
+                key={testimonial.id || index}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -108,7 +121,7 @@ const Testimonials = () => {
                           />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-r from-[#9f55ff] to-[#7000ff] flex items-center justify-center text-2xl font-bold text-white">
-                            {testimonial.name.charAt(0)}
+                            {testimonial.name?.charAt(0) || "?"}
                           </div>
                         )}
                       </div>
@@ -116,29 +129,29 @@ const Testimonials = () => {
 
                     <div>
                       <h3 className="text-xl font-semibold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#ff014f] group-hover:to-[#ff6b9d] group-hover:bg-clip-text transition-all duration-300">
-                        {testimonial.name}
+                        {testimonial.name || "Anonymous"}
                       </h3>
                       <p className="text-sm text-gray-400 group-hover:text-[#ff014f] transition-colors">
-                        {testimonial.position}
+                        {testimonial.position || ""}
                       </p>
                       <p className="text-xs text-gray-500">
-                        {testimonial.company}
+                        {testimonial.company || ""}
                       </p>
                     </div>
                   </div>
 
                   {/* Stars */}
                   <div className="flex gap-1 mb-4">
-                    {renderStars(testimonial.rating)}
+                    {renderStars(testimonial.rating || 5)}
                   </div>
 
-                  {/* Testimonial text - Fixed quotation spacing */}
+                  {/* Testimonial text */}
                   <p className="text-gray-300 italic leading-relaxed relative pl-6 pr-6">
                     <span className="text-4xl text-[#ff014f]/20 absolute -top-2 left-0">
                       "
                     </span>
                     <span className="relative z-10">
-                      {testimonial.testimonial}
+                      {testimonial.testimonial || ""}
                     </span>
                     <span className="text-4xl text-[#ff014f]/20 absolute -bottom-4 right-0">
                       "

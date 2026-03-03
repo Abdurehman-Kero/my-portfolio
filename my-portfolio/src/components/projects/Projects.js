@@ -12,7 +12,7 @@ const Projects = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/projects");
+      const response = await fetch("https://porfoliobe.abdurehman.com/api/projects");
       const data = await response.json();
 
       if (Array.isArray(data)) {

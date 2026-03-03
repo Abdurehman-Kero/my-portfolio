@@ -21,7 +21,7 @@ const AdminBanner = () => {
 
   const fetchBanners = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/banner");
+      const response = await fetch("https://porfoliobe.abdurehman.com/api/banner");
       const data = await response.json();
       setBanners(data);
 
@@ -36,7 +36,7 @@ const AdminBanner = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/admin/login", {
+      const response = await fetch("https://porfoliobe.abdurehman.com/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
@@ -71,7 +71,7 @@ const AdminBanner = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/banner", {
+      const response = await fetch("https://porfoliobe.abdurehman.com/api/banner", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -92,7 +92,7 @@ const AdminBanner = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Delete this banner image?")) {
       try {
-        await fetch(`http://localhost:5000/api/banner/${id}`, {
+        await fetch(`https://porfoliobe.abdurehman.com/api/banner/${id}`, {
           method: "DELETE",
         });
         fetchBanners();

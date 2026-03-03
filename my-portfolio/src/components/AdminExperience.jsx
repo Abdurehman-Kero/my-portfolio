@@ -26,7 +26,7 @@ const AdminExperience = () => {
 
   const fetchExperiences = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/experiences");
+      const response = await fetch("https://porfoliobe.abdurehman.com/api/experiences");
       const data = await response.json();
       setExperiences(data);
     } catch (error) {
@@ -37,7 +37,7 @@ const AdminExperience = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/admin/login", {
+      const response = await fetch("https://porfoliobe.abdurehman.com/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
@@ -59,8 +59,8 @@ const AdminExperience = () => {
     e.preventDefault();
     try {
       const url = editingExp
-        ? `http://localhost:5000/api/experiences/${editingExp.id}`
-        : "http://localhost:5000/api/experiences";
+        ? `https://porfoliobe.abdurehman.com/api/experiences/${editingExp.id}`
+        : "https://porfoliobe.abdurehman.com/api/experiences";
       const method = editingExp ? "PUT" : "POST";
 
       const response = await fetch(url, {
@@ -100,7 +100,7 @@ const AdminExperience = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Delete this experience?")) {
       try {
-        await fetch(`http://localhost:5000/api/experiences/${id}`, {
+        await fetch(`https://porfoliobe.abdurehman.com/api/experiences/${id}`, {
           method: "DELETE",
         });
         fetchExperiences();

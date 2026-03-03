@@ -29,7 +29,7 @@ const AdminTestimonials = () => {
 
   const fetchTestimonials = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/testimonials");
+      const response = await fetch("https://porfoliobe.abdurehman.com/api/testimonials");
       const data = await response.json();
       setTestimonials(data);
     } catch (error) {
@@ -40,7 +40,7 @@ const AdminTestimonials = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/admin/login", {
+      const response = await fetch("https://porfoliobe.abdurehman.com/api/admin/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,8 +91,8 @@ const AdminTestimonials = () => {
 
     try {
       const url = editingTestimonial
-        ? `http://localhost:5000/api/testimonials/${editingTestimonial.id}`
-        : "http://localhost:5000/api/testimonials";
+        ? `https://porfoliobe.abdurehman.com/api/testimonials/${editingTestimonial.id}`
+        : "https://porfoliobe.abdurehman.com/api/testimonials";
 
       const method = editingTestimonial ? "PUT" : "POST";
 
@@ -140,7 +140,7 @@ const AdminTestimonials = () => {
     if (window.confirm("Are you sure you want to delete this testimonial?")) {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/testimonials/${id}`,
+          `https://porfoliobe.abdurehman.com/api/testimonials/${id}`,
           {
             method: "DELETE",
           },
