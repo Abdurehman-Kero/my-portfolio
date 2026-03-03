@@ -132,13 +132,15 @@ const Testimonials = () => {
                     {renderStars(testimonial.rating)}
                   </div>
 
-                  {/* Testimonial text */}
-                  <p className="text-gray-300 italic leading-relaxed relative">
-                    <span className="text-4xl text-[#ff014f]/20 absolute -top-2 -left-2">
+                  {/* Testimonial text - Fixed quotation spacing */}
+                  <p className="text-gray-300 italic leading-relaxed relative pl-6 pr-6">
+                    <span className="text-4xl text-[#ff014f]/20 absolute -top-2 left-0">
                       "
                     </span>
-                    {testimonial.testimonial}
-                    <span className="text-4xl text-[#ff014f]/20 absolute -bottom-4 -right-2">
+                    <span className="relative z-10">
+                      {testimonial.testimonial}
+                    </span>
+                    <span className="text-4xl text-[#ff014f]/20 absolute -bottom-4 right-0">
                       "
                     </span>
                   </p>

@@ -7,8 +7,8 @@ const router = express.Router();
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.EMAIL_USER, // Your email (add to .env)
-    pass: process.env.EMAIL_PASS, // Your app password (add to .env)
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 
@@ -17,60 +17,41 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { name, email, phone, subject, message } = req.body;
+  const { name, email, message } = req.body;
 
   try {
-    // 1. Save to MySQL database (you already have this)
+    // 1. Save to MySQL database
     const [result] = await pool.query(
-      "INSERT INTO contacts (name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?)",
-      [name, email, phone, subject, message],
+      "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)",
+      [name, email, message],
     );
 
     // 2. Send email notification
     const mailOptions = {
-      from: email, // The person who contacted you
-      to: process.env.EMAIL_USER, // Your email
-      subject: `Portfolio Contact: ${subject}`,
+      from: email,
+      to: process.env.EMAIL_USER,
+      subject: `Portfolio Contact from ${name}`,
       text: `
-You have a new message from your portfolio website:
-
 Name: ${name}
 Email: ${email}
-Phone: ${phone}
-Subject: ${subject}
-
-Message:
-${message}
-
-Sent on: ${new Date().toLocaleString()}
+Message: ${message}
       `,
       html: `
-        <h3>New Portfolio Message</h3>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, "<br>")}</p>
-        <hr>
-        <p><small>Sent on: ${new Date().toLocaleString()}</small></p>
+        <p><strong>Message:</strong> ${message}</p>
       `,
     };
 
-    // Send email (don't await - let it run in background)
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error("Email sending failed:", error);
-      } else {
-        console.log("Email sent:", info.response);
-      }
+    // Send email in background
+    transporter.sendMail(mailOptions, (error) => {
+      if (error) console.error("Email failed:", error);
     });
 
-    // Return success (email sending happens in background)
     res.json({
       success: true,
       id: result.insertId,
-      message: "Message saved successfully!",
+      message: "Message sent successfully!",
     });
   } catch (error) {
     console.error("Database error:", error);

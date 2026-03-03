@@ -11,6 +11,7 @@ app.use("/api/projects", require("./routes/projectRoutes"));
 app.use("/api/testimonials", require("./routes/testimonialRoutes")); // Add this line
 
 app.use("/api/admin", require("./routes/adminRoutes"));
+app.use("/api/experiences", require("./routes/experienceRoutes"));
 app.use("/api/testimonials", require("./routes/testimonialRoutes"));
 app.get("/", (req, res) => {
   res.json({ message: "Portfolio API" });

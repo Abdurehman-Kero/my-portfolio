@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ResumeCard from "./ResumeCard";
 
 const Education = () => {
+  const [experiences, setExperiences] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchExperiences();
+  }, []);
+
+  const fetchExperiences = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/experiences");
+      const data = await response.json();
+      // Sort by displayOrder
+      const sorted = data.sort(
+        (a, b) => (a.displayOrder || 0) - (b.displayOrder || 0),
+      );
+      setExperiences(sorted);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching experiences:", error);
+      setLoading(false);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -43,17 +66,10 @@ const Education = () => {
           />
 
           <ResumeCard
-            title="High School Education"
-            subTitle="Selam Primary and Secondary School | 2018 - 2022"
+            title="Middle and High School Education"
+            subTitle="Selam Primary and Secondary School | 2014 - 2022"
             result="95/100"
-            des="Graduated with distinction. Focus on Mathematics, Physics, and Computer Science fundamentals."
-          />
-
-          <ResumeCard
-            title="Middle School Education"
-            subTitle="Selam Primary and Secondary School | 2012 - 2017"
-            result="94.5/100"
-            des="Strong foundation in Mathematics, General Science, and Social Studies."
+            des="These were some of the years that shaped my teenage years and befriended some of my life long friends. It is also where I discovered basic on Mathematics, Physics, and Computer Science fundamentals."
           />
         </div>
 
@@ -92,7 +108,7 @@ const Education = () => {
         </div>
       </div>
 
-      {/* Right Column - Certifications & Experience */}
+      {/* Right Column - Certifications & Dynamic Experience */}
       <div className="w-full lgl:w-1/2">
         <div className="py-6 lgl:py-12 font-titleFont flex flex-col gap-4">
           <div className="flex items-center gap-3">
@@ -132,7 +148,7 @@ const Education = () => {
           />
         </div>
 
-        {/* Experience Section */}
+        {/* Dynamic Experience Section - Now fetches from API */}
         <div className="py-6 lgl:py-12 font-titleFont flex flex-col gap-4">
           <div className="flex items-center gap-3">
             <span className="w-8 h-[2px] bg-gradient-to-r from-[#ff014f] to-[#ff6b9d]" />
@@ -146,19 +162,40 @@ const Education = () => {
         </div>
 
         <div className="mt-6 lgl:mt-14 w-full border-l-[6px] border-l-gradient-to-b from-[#9f55ff] via-[#ff014f] to-[#7000ff] border-opacity-30 flex flex-col gap-6 pl-6">
-          <ResumeCard
-            title="Full Stack Web Development Intern"
-            subTitle="Future Interns · Remote | 2026"
-            result="3 mos"
-            des="Selected for remote internship program. Building real-world web applications using React, Node.js, Express, and modern development workflows with Git and GitHub."
-          />
+          {loading ? (
+            <div className="flex justify-center items-center py-10">
+              <div className="w-3 h-3 bg-gradient-to-r from-[#9f55ff] to-[#7000ff] rounded-full animate-bounce" />
+              <div className="w-3 h-3 bg-gradient-to-r from-[#ff014f] to-[#ff6b9d] rounded-full animate-bounce delay-100 mx-1" />
+              <div className="w-3 h-3 bg-gradient-to-r from-[#9f55ff] to-[#7000ff] rounded-full animate-bounce delay-200" />
+            </div>
+          ) : experiences.length > 0 ? (
+            experiences.map((exp) => (
+              <ResumeCard
+                key={exp.id}
+                title={exp.title}
+                subTitle={`${exp.company || ""} ${exp.year ? `| ${exp.year}` : ""} ${exp.quarter ? `${exp.quarter}` : ""}`}
+                result={exp.currentPosition ? "Current" : ""}
+                des={exp.description}
+              />
+            ))
+          ) : (
+            <>
+              {/* Fallback to static experiences if no dynamic data */}
+              <ResumeCard
+                title="Full Stack Web Development Intern"
+                subTitle="Future Interns · Remote | 2026"
+                result="3 mos"
+                des="Selected for remote internship program. Building real-world web applications using React, Node.js, Express, and modern development workflows with Git and GitHub."
+              />
 
-          <ResumeCard
-            title="Full-Stack Development Trainee"
-            subTitle="INSA Summer Camp | Jul 2024 - 2025"
-            result="9 mos"
-            des="Comprehensive training in modern web technologies. Led a capstone project implementing full-stack solutions with React and Node.js."
-          />
+              <ResumeCard
+                title="Full-Stack Development Trainee"
+                subTitle="INSA Summer Camp | Jul 2024 - 2025"
+                result="9 mos"
+                des="Comprehensive training in modern web technologies. Led a capstone project implementing full-stack solutions with React and Node.js."
+              />
+            </>
+          )}
         </div>
       </div>
     </motion.div>
