@@ -14,6 +14,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import Testimonials from "./components/tesimonial/Testimonial";
 import AdminTestimonials from "./components/AdminTestimonials";
 import AdminExperience from "./components/AdminExperience";
+import AdminBanner from "./components/AdminBanner";
 
 function App() {
   return (
@@ -39,16 +40,14 @@ function App() {
             </div>
           }
         />
-
         {/* Admin Main Dashboard */}
         <Route path="/admin" element={<AdminMain />} />
-
+        {/* Admin Banner Route */}
+        <Route path="/admin/banner" element={<AdminBanner />} />;
         {/* Admin Projects */}
         <Route path="/admin/projects" element={<AdminDashboard />} />
-
         {/* Admin Testimonials */}
         <Route path="/admin/testimonials" element={<AdminTestimonials />} />
-
         {/* Admin Experience - NEW */}
         <Route path="/admin/experience" element={<AdminExperience />} />
       </Routes>
