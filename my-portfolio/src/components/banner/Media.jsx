@@ -17,7 +17,7 @@ const Media = () => {
   };
 
   return (
-    <div className="flex flex-col xl:flex-row gap-8 lgl:gap-12 justify-between items-start lgl:items-center">
+    <div className="flex flex-col  xl:flex-row gap-8 lgl:gap-12 justify-between items-start lgl:items-center">
       {/* Social Links Section */}
       <div className="w-full lgl:w-auto">
         <h2 className="text-sm uppercase font-titleFont mb-4 text-gray-400 tracking-wider">

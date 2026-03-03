@@ -153,3 +153,6 @@
 .active .nav-underline {
   background: linear-gradient(90deg, #ff014f, #ff6b9d) !important;
 }
+.herosection {
+margin-bottom: 220px
+}

@@ -13,6 +13,7 @@ import AdminMain from "./components/AdminMain";
 import AdminDashboard from "./components/AdminDashboard";
 import Testimonials from "./components/tesimonial/Testimonial";
 import AdminTestimonials from "./components/AdminTestimonials";
+import AdminExperience from "./components/AdminExperience";
 
 function App() {
   return (
@@ -47,6 +48,9 @@ function App() {
 
         {/* Admin Testimonials */}
         <Route path="/admin/testimonials" element={<AdminTestimonials />} />
+
+        {/* Admin Experience - NEW */}
+        <Route path="/admin/experience" element={<AdminExperience />} />
       </Routes>
     </BrowserRouter>
   );

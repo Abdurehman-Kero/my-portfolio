@@ -17,10 +17,10 @@ module.exports = {
         titleFont: ["Montserrat", "sans-serif"],
       },
       colors: {
-        bodyColor: "#212428",
+        bodyColor: "#000000", // Changed from "#212428" to pure black
         lightText: "#c4cfde",
         boxBg: "linear-gradient(145deg, #1e2024, #23272b)",
-        designColor: "#ff014f", // Fallback color (the pink from your gradient)
+        designColor: "#ff014f",
       },
       backgroundImage: {
         "gradient-purple": "linear-gradient(90deg, #9f55ff, #7000ff)",
