@@ -12,7 +12,7 @@ const Education = () => {
 
   const fetchExperiences = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/experiences");
+      const response = await fetch("https://porfoliobe.abdurehman.com/api/experiences");
       const data = await response.json();
       // Sort by displayOrder
       const sorted = data.sort(

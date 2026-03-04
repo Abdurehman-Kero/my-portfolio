@@ -11,7 +11,7 @@ const RightBanner = () => {
 
   const fetchBannerImage = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/banner/active");
+      const response = await fetch("https://porfoliobe.abdurehman.com/api/banner/active");
       const data = await response.json();
 
       // If there's a custom image URL from the database, use it

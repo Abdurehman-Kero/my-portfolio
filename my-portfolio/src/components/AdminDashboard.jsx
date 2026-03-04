@@ -29,7 +29,7 @@ const AdminDashboard = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/projects");
+      const response = await fetch("https://porfoliobe.abdurehman.com/api/projects");
       const data = await response.json();
 
       if (Array.isArray(data)) {
@@ -46,7 +46,7 @@ const AdminDashboard = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/admin/login", {
+      const response = await fetch("https://porfoliobe.abdurehman.com/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
@@ -94,8 +94,8 @@ const AdminDashboard = () => {
 
     try {
       const url = editingProject
-        ? `http://localhost:5000/api/projects/${editingProject.id}`
-        : "http://localhost:5000/api/projects";
+        ? `https://porfoliobe.abdurehman.com/api/projects/${editingProject.id}`
+        : "https://porfoliobe.abdurehman.com/api/projects";
 
       const method = editingProject ? "PUT" : "POST";
 
@@ -151,7 +151,7 @@ const AdminDashboard = () => {
     if (window.confirm("Are you sure you want to delete this project?")) {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/projects/${id}`,
+          `https://porfoliobe.abdurehman.com/api/projects/${id}`,
           {
             method: "DELETE",
           },
