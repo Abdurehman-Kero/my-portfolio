@@ -41,8 +41,14 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* Active link styling with pink gradient */
 .active {
-  color: #5ACF53;
+  background: linear-gradient(90deg, #ff014f, #ff6b9d) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
   position: relative;
 }
 
@@ -53,22 +59,11 @@
   height: 2px;
   bottom: -5px;
   left: 0;
-  background-color: #5ACF53;
-  transform: scaleX(0);
-  transform-origin: bottom left;
-  transition: transform 0.2s ease-in-out;
-}
-
-.active::after {
+  background: linear-gradient(90deg, #ff014f, #ff6b9d) !important;
   transform: scaleX(1);
 }
 
-
-
-
-
-
-
+/* Animation keyframes */
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -139,20 +134,193 @@
   background-size: 200% 200%;
   animation: gradient-xy 3s ease infinite;
 }
-/* Active link styling with pink gradient */
-.active {
-  background: linear-gradient(90deg, #ff014f, #ff6b9d) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-  color: transparent !important;
+
+/* Wave animation for hand emoji */
+@keyframes wave-rapid-correct {
+  0% {
+    transform: rotate(-90deg) scale(1);
+  }
+  10% {
+    transform: rotate(-60deg) scale(1.2);
+  }
+  20% {
+    transform: rotate(-25deg) scale(1.4);
+  }
+  30% {
+    transform: rotate(0deg) scale(1.6);
+  }
+  40% {
+    transform: rotate(30deg) scale(1.5);
+  }
+  50% {
+    transform: rotate(60deg) scale(1.4);
+  }
+  60% {
+    transform: rotate(30deg) scale(1.3);
+  }
+  70% {
+    transform: rotate(0deg) scale(1.2);
+  }
+  80% {
+    transform: rotate(-25deg) scale(1.1);
+  }
+  90% {
+    transform: rotate(-60deg) scale(1);
+  }
+  95% {
+    transform: rotate(-80deg) scale(0.95);
+  }
+  100% {
+    transform: rotate(-90deg) scale(1);
+  }
 }
 
-/* For any underline or border on active state */
-.active::after,
-.active .nav-underline {
-  background: linear-gradient(90deg, #ff014f, #ff6b9d) !important;
+.animate-wave-rapid-correct {
+  animation: wave-rapid-correct 3s ease-in-out;
+  transform-origin: 70% 80%;
+  display: inline-block;
 }
-.herosection {
-margin-bottom: 220px
+
+/* ===== RESPONSIVE FIXES - ONLY AFFECT MOBILE ===== */
+@media (max-width: 640px) {
+  /* Fix banner margin */
+  .herosection {
+    margin-bottom: 50px !important;
+  }
+  
+  /* Fix banner icon sizes */
+  .bannerIcon {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 1.25rem !important;
+  }
+  
+  /* Fix fixed width images */
+  .w-\[180px\] {
+    width: 140px !important;
+    height: 140px !important;
+  }
+  
+  .w-\[280px\] {
+    width: 220px !important;
+    height: 220px !important;
+  }
+  
+  /* Adjust gaps and spacing */
+  .gap-6, .gap-8, .gap-10 {
+    gap: 1rem !important;
+  }
+  
+  .gap-20 {
+    gap: 2rem !important;
+  }
+  
+  /* Adjust padding */
+  .px-4 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .px-6 {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+  
+  .px-8 {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  
+  .p-6 {
+    padding: 1.25rem !important;
+  }
+  
+  .p-8 {
+    padding: 1.5rem !important;
+  }
+  
+  /* Text size adjustments */
+  .text-5xl {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .text-4xl {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .text-3xl {
+    font-size: 1.75rem !important;
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Grid adjustments */
+  .grid-cols-3 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+  
+  /* Fix banner text and image alignment */
+  .flex.items-center.gap-3 {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Hand emoji alignment */
+  .flex.items-center.gap-3 img {
+    width: 32px !important;
+    height: 32px !important;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+}
+
+/* Tablet adjustments - ONLY AFFECT TABLET */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .w-\[280px\] {
+    width: 240px !important;
+    height: 240px !important;
+  }
+  
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Global fixes - only for overflow */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure images don't overflow */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Safe area insets for modern mobile devices */
+@supports (padding: max(0px)) {
+  .px-4 {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
 }
