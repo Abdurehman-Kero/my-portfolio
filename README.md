@@ -1,6 +1,5 @@
 # 🚀 Abdurehman Kero - Full Stack Developer Portfolio
 
-![Portfolio Banner](link-to-your-banner-image)
 
 Welcome to my personal portfolio website! This is a modern, full-stack web application built to showcase my projects, skills, and professional journey as a Full Stack Developer.
 
