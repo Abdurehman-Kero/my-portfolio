@@ -8,7 +8,7 @@ const Card = ({ item }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       whileHover={{ y: -8 }}
-      className="group relative bg-gradient-to-br from-[#1e2024] to-[#23272b] p-6 rounded-xl border border-gray-800 hover:border-designColor/50 transition-all duration-300 hover:shadow-xl hover:shadow-designColor/10"
+      className="group relative bg-gradient-to-br from-[#1e2024] to-[#23272b] p-6 rounded-xl border border-gray-800 hover:border-designColor/50 transition-all duration-300 hover:shadow-xl hover:shadow-designColor/10 h-full flex flex-col"
     >
       {/* Icon Container */}
       <div className="w-16 h-16 mb-5 rounded-lg bg-gradient-to-br from-designColor/10 to-transparent flex items-center justify-center text-designColor group-hover:scale-110 transition-transform duration-300">

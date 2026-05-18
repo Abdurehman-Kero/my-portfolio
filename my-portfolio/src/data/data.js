@@ -7,10 +7,17 @@ import {
   FaShieldAlt,
   FaCode,
   FaCloud,
+  FaRobot,
 } from "react-icons/fa";
 
 // Features Data
 export const featuresData = [
+  {
+    id: 7,
+    icon: <FaRobot className="text-3xl" />,
+    title: "AI-Powered Full Stack Applications",
+    des: "Integrating advanced AI models and large language models (LLMs) into full-stack applications to build intelligent, context-aware, and highly automated software solutions.",
+  },
   {
     id: 1,
     icon: <FaGlobe className="text-3xl" />,
