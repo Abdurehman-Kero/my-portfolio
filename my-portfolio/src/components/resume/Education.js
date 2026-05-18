@@ -168,32 +168,42 @@ const Education = () => {
               <div className="w-3 h-3 bg-gradient-to-r from-[#ff014f] to-[#ff6b9d] rounded-full animate-bounce delay-100 mx-1" />
               <div className="w-3 h-3 bg-gradient-to-r from-[#9f55ff] to-[#7000ff] rounded-full animate-bounce delay-200" />
             </div>
-          ) : experiences.length > 0 ? (
-            experiences.map((exp) => (
-              <ResumeCard
-                key={exp.id}
-                title={exp.title}
-                subTitle={`${exp.company || ""} ${exp.year ? `| ${exp.year}` : ""} ${exp.quarter ? `${exp.quarter}` : ""}`}
-                result={exp.currentPosition ? "Current" : ""}
-                des={exp.description}
-              />
-            ))
           ) : (
             <>
-              {/* Fallback to static experiences if no dynamic data */}
+              {/* Added as requested by user */}
               <ResumeCard
-                title="Full Stack Web Development Intern"
-                subTitle="Future Interns · Remote | 2026"
-                result="3 mos"
-                des="Selected for remote internship program. Building real-world web applications using React, Node.js, Express, and modern development workflows with Git and GitHub."
+                title="Backend Developer"
+                subTitle="Zulu Tech"
+                result="Developer"
+                des="Building and optimizing scalable backend architectures, writing robust APIs, and collaborating on modern web application deployment."
               />
-
-              <ResumeCard
-                title="Full-Stack Development Trainee"
-                subTitle="INSA Summer Camp | Jul 2024 - 2025"
-                result="9 mos"
-                des="Comprehensive training in modern web technologies. Led a capstone project implementing full-stack solutions with React and Node.js."
-              />
+              
+              {experiences.map((exp) => (
+                <ResumeCard
+                  key={exp.id}
+                  title={exp.title}
+                  subTitle={`${exp.company || ""}`}
+                  result={exp.currentPosition ? "Current" : ""}
+                  des={exp.description}
+                />
+              ))}
+              
+              {experiences.length === 0 && (
+                <>
+                  <ResumeCard
+                    title="Full Stack Web Development Intern"
+                    subTitle="Future Interns · Remote"
+                    result="Intern"
+                    des="Selected for remote internship program. Building real-world web applications using React, Node.js, Express, and modern development workflows with Git and GitHub."
+                  />
+                  <ResumeCard
+                    title="Full-Stack Development Trainee"
+                    subTitle="INSA Summer Camp"
+                    result="Trainee"
+                    des="Comprehensive training in modern web technologies. Led a capstone project implementing full-stack solutions with React and Node.js."
+                  />
+                </>
+              )}
             </>
           )}
         </div>
