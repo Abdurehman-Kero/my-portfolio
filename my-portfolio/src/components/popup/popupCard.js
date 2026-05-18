@@ -26,26 +26,28 @@ const PopupCard = ({ message, date }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -50 }}
           transition={{ duration: 0.3 }}
-          className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[100] w-full max-w-3xl px-4"
+          className="fixed top-4 left-0 right-0 mx-auto z-[100] w-[92%] sm:w-[85%] max-w-3xl"
         >
           <div className="relative bg-gradient-to-r from-[#1e2024] to-[#23272b] rounded-xl shadow-2xl border border-gray-800 overflow-hidden group">
             {/* Top gradient line */}
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#9f55ff] via-[#ff014f] to-[#7000ff]" />
 
-            <div className="relative z-10 px-6 py-4 flex items-center justify-between gap-4">
+            <div className="relative z-10 px-4 py-3 sm:px-6 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
               {/* Left section with icon and message */}
-              <div className="flex items-center gap-3 flex-1">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#9f55ff] to-[#7000ff] flex items-center justify-center flex-shrink-0">
+              <div className="flex items-start sm:items-center gap-3 flex-1 w-full">
+                <div className="w-8 h-8 mt-1 sm:mt-0 rounded-full bg-gradient-to-r from-[#9f55ff] to-[#7000ff] flex items-center justify-center flex-shrink-0">
                   <FaGift className="text-white text-sm" />
                 </div>
-                <p className="text-gray-300 text-sm md:text-base">{message}</p>
+                <p className="text-gray-300 text-sm md:text-base leading-snug w-full">
+                  {message}
+                </p>
               </div>
 
               {/* Right section with date and close button */}
-              <div className="flex items-center gap-4 flex-shrink-0">
-                <div className="flex items-center gap-2 text-gray-400 text-sm">
+              <div className="flex items-center justify-end w-full sm:w-auto gap-4 flex-shrink-0">
+                <div className="flex items-center gap-2 text-gray-400 text-xs sm:text-sm">
                   <FaCalendarAlt className="text-[#ff014f]" />
-                  <span className="hidden sm:inline">{date}</span>
+                  <span>{date}</span>
                 </div>
                 
                 <button
