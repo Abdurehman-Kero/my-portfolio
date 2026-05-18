@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaTrash, FaEdit, FaPlus } from "react-icons/fa";
+import { FaTrash, FaEdit } from "react-icons/fa";
 
 const AdminExperience = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
