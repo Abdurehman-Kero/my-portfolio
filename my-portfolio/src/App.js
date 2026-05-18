@@ -7,6 +7,7 @@ import Footer from "./components/footer/Footer";
 import FooterBottom from "./components/footer/FooterBottom";
 import Navbar from "./components/navbar/Navbar";
 import Projects from "./components/projects/Projects";
+import ProjectDetail from "./components/projects/ProjectDetail";
 import Resume from "./components/resume/Resume";
 import Sidebar from "./components/banner/stats";
 import AdminMain from "./components/AdminMain";
@@ -40,6 +41,8 @@ function App() {
             </div>
           }
         />
+        {/* Project Detail Page */}
+        <Route path="/project/:id" element={<ProjectDetail />} />
         {/* Admin Main Dashboard */}
         <Route path="/admin" element={<AdminMain />} />
         {/* Admin Banner Route */}
