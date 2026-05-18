@@ -80,26 +80,32 @@ const Navbar = () => {
 
           {/* Mobile Menu */}
           {showMenu && (
-            <div className="w-[80%] h-screen overflow-scroll absolute top-0 left-0 bg-[#212428] p-4 scrollbar-hide border-r border-gray-800">
-              <div className="flex flex-col gap-8 py-2 relative">
+            <div className="fixed inset-0 z-[100] bg-bodyColor/95 backdrop-blur-xl p-6 sm:p-10 scrollbar-hide flex flex-col justify-center border-l border-gray-800 shadow-2xl transition-all duration-300">
+              
+              {/* Close Button */}
+              <span
+                onClick={() => setShowMenu(false)}
+                className="absolute top-6 right-6 w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#ff014f] transition-all duration-300 text-2xl cursor-pointer shadow-lg"
+              >
+                <MdClose />
+              </span>
+
+              <div className="flex flex-col gap-10 max-w-sm mx-auto w-full">
                 {/* Profile Section */}
-                <div>
-                  <h2 className="text-2xl font-bold bg-gradient-to-r from-[#ff014f] to-[#ff6b9d] bg-clip-text text-transparent">
+                <div className="text-center">
+                  <h2 className="text-3xl font-bold bg-gradient-to-r from-[#9f55ff] via-[#ff014f] to-[#ff6b9d] bg-clip-text text-transparent mb-3">
                     Abdurehman Kero
                   </h2>
-                  <p className="text-sm text-gray-400 mt-2">
+                  <p className="text-sm text-gray-400 leading-relaxed px-4">
                     I design experiences that are both functional and exciting,
                     making every interaction feel smooth and memorable.
                   </p>
                 </div>
 
                 {/* Mobile Navigation Links */}
-                <ul className="flex flex-col gap-4">
+                <ul className="flex flex-col gap-5 text-center">
                   {navLinksdata.map((item) => (
-                    <li
-                      key={item._id}
-                      className="text-base font-normal text-gray-400 tracking-wide cursor-pointer hover:text-transparent hover:bg-gradient-to-r hover:from-[#ff014f] hover:to-[#ff6b9d] hover:bg-clip-text transition-all duration-300"
-                    >
+                    <li key={item._id} className="group">
                       <Link
                         onClick={() => setShowMenu(false)}
                         activeClass="active"
@@ -108,6 +114,7 @@ const Navbar = () => {
                         smooth={true}
                         offset={-70}
                         duration={500}
+                        className="text-xl font-medium text-gray-300 tracking-wide cursor-pointer group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#ff014f] group-hover:to-[#ff6b9d] group-hover:bg-clip-text transition-all duration-300"
                       >
                         {item.title}
                       </Link>
@@ -116,64 +123,45 @@ const Navbar = () => {
                 </ul>
 
                 {/* Social Connect Section */}
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-3">
-                    <span className="w-8 h-[2px] bg-gradient-to-r from-[#ff014f] to-[#ff6b9d]" />
-                    <h2 className="text-base uppercase font-titleFont text-gray-300">
-                      Let's Connect
-                    </h2>
-                  </div>
-
-                  <div className="flex gap-3">
-                    {/* Telegram */}
+                <div className="flex flex-col items-center gap-5 mt-4">
+                  <h2 className="text-sm uppercase tracking-widest font-titleFont text-gray-500">
+                    Let's Connect
+                  </h2>
+                  <div className="flex gap-4">
                     <a
                       href="https://t.me/moti_kr"
                       target="_blank"
                       rel="noreferrer"
-                      className="w-10 h-10 rounded-full bg-[#141518] flex items-center justify-center text-gray-400 hover:bg-gradient-to-r hover:from-[#ff014f] hover:to-[#ff6b9d] hover:text-white transition-all duration-300 border border-gray-800 hover:border-transparent"
+                      className="w-12 h-12 rounded-full bg-gray-900/80 flex items-center justify-center text-gray-400 hover:bg-[#ff014f] hover:text-white hover:-translate-y-1 transition-all duration-300 border border-gray-800"
                     >
-                      <FaTelegramPlane />
+                      <FaTelegramPlane size={20} />
                     </a>
-
-                    {/* WhatsApp */}
                     <a
                       href="https://wa.me/+251982310974"
                       target="_blank"
                       rel="noreferrer"
-                      className="w-10 h-10 rounded-full bg-[#141518] flex items-center justify-center text-gray-400 hover:bg-gradient-to-r hover:from-[#ff014f] hover:to-[#ff6b9d] hover:text-white transition-all duration-300 border border-gray-800 hover:border-transparent"
+                      className="w-12 h-12 rounded-full bg-gray-900/80 flex items-center justify-center text-gray-400 hover:bg-[#ff014f] hover:text-white hover:-translate-y-1 transition-all duration-300 border border-gray-800"
                     >
-                      <FaWhatsapp />
+                      <FaWhatsapp size={20} />
                     </a>
-
-                    {/* LinkedIn */}
                     <a
                       href="https://www.linkedin.com/in/abdukr"
                       target="_blank"
                       rel="noreferrer"
-                      className="w-10 h-10 rounded-full bg-[#141518] flex items-center justify-center text-gray-400 hover:bg-gradient-to-r hover:from-[#ff014f] hover:to-[#ff6b9d] hover:text-white transition-all duration-300 border border-gray-800 hover:border-transparent"
+                      className="w-12 h-12 rounded-full bg-gray-900/80 flex items-center justify-center text-gray-400 hover:bg-[#ff014f] hover:text-white hover:-translate-y-1 transition-all duration-300 border border-gray-800"
                     >
-                      <FaLinkedinIn />
+                      <FaLinkedinIn size={20} />
                     </a>
-
-                    {/* LeetCode */}
                     <a
                       href="https://leetcode.com/u/Abdurehman-kr/"
                       target="_blank"
                       rel="noreferrer"
-                      className="w-10 h-10 rounded-full bg-[#141518] flex items-center justify-center text-gray-400 hover:bg-gradient-to-r hover:from-[#ff014f] hover:to-[#ff6b9d] hover:text-white transition-all duration-300 border border-gray-800 hover:border-transparent"
+                      className="w-12 h-12 rounded-full bg-gray-900/80 flex items-center justify-center text-gray-400 hover:bg-[#ff014f] hover:text-white hover:-translate-y-1 transition-all duration-300 border border-gray-800"
                     >
-                      <SiLeetcode />
+                      <SiLeetcode size={20} />
                     </a>
                   </div>
                 </div>
-
-                {/* Close Button */}
-                <span
-                  onClick={() => setShowMenu(false)}
-                  className="absolute top-4 right-4 text-gray-400 hover:text-transparent hover:bg-gradient-to-r hover:from-[#ff014f] hover:to-[#ff6b9d] hover:bg-clip-text transition-all duration-300 text-2xl cursor-pointer"
-                >
-                  <MdClose />
-                </span>
               </div>
             </div>
           )}
