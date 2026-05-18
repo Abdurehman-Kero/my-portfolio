@@ -1008,3 +1008,46 @@ html, body, #root {
 body.light-theme .theme-toggler {
   filter: invert(1) hue-rotate(180deg) !important;
 }
+
+/* ============================================================
+   MOBILE RESPONSIVENESS: VERTICAL STACKING FOR HORIZONTAL SECTIONS
+   ============================================================ */
+@media (max-width: 768px) {
+  .works-section-container {
+    height: auto !important;
+  }
+  
+  .works-section-sticky {
+    position: static !important;
+    height: auto !important;
+    top: auto !important;
+  }
+
+  .works-track-wrap {
+    overflow: visible !important;
+  }
+
+  .works-track {
+    flex-direction: column !important;
+    transform: none !important;
+    gap: 2rem !important;
+    padding-bottom: 2rem;
+  }
+
+  /* Ensure cards take full width on mobile */
+  .works-card {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Adjust features wrapper */
+  .works-track > div {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Hide the horizontal arrows on mobile since we scroll vertically */
+  .works-arrow {
+    display: none !important;
+  }
+}

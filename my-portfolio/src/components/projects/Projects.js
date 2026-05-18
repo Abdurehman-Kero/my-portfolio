@@ -88,7 +88,10 @@ const Projects = () => {
       <section id="projects" className="works-section-container">
         <div className="works-section-sticky">
           <div className="works-header">
-            <Title title="VISIT MY PORTFOLIO AND KEEP YOUR FEEDBACK" des="My Works" />
+            <Title title="A CURATED SHOWCASE OF MY JOURNEY" des="Selected Works" />
+            <p className="text-sm md:text-base text-gray-400 max-w-2xl mx-auto mt-[-10px] pb-6 text-center">
+              While I've built many applications, here are a few hand-picked projects that best showcase my technical focus and problem-solving approach.
+            </p>
             <div className="works-divider" />
           </div>
           <div className="works-loading">
@@ -107,7 +110,10 @@ const Projects = () => {
         <div className="works-blob works-blob-r" />
 
         <div className="works-header">
-          <Title title="VISIT MY PORTFOLIO AND KEEP YOUR FEEDBACK" des="My Works" />
+          <Title title="A CURATED SHOWCASE OF MY JOURNEY" des="Selected Works" />
+          <p className="text-sm md:text-base text-gray-400 max-w-2xl mx-auto mt-[-10px] pb-4 px-4 text-center">
+            While I've built many applications, here are a few hand-picked projects that best showcase my technical focus and problem-solving approach.
+          </p>
           <div className="works-divider" />
         </div>
 
