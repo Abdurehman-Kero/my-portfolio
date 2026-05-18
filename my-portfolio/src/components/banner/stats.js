@@ -94,16 +94,11 @@ const Sidebar = () => {
       <div className="bg-gradient-to-br from-gray-900/40 to-gray-900/20 rounded-2xl p-6 md:p-8 border border-gray-800/50 backdrop-blur-sm">
         {/* Section Header */}
 
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-white mb-2"></h2>
-          <p className="text-gray-400 text-sm">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-1.5 h-8 bg-gradient-to-b from-designColor to-blue-500 rounded-full" />
-              <h2 className="text-base md:text-lg font-semibold text-gray-200 tracking-wide">
-                Technologies I Work With
-              </h2>
-            </div>
-          </p>
+        <div className="flex items-center gap-3 mb-6">
+          <span className="w-1.5 h-8 bg-gradient-to-b from-designColor to-blue-500 rounded-full" />
+          <h2 className="text-base md:text-lg font-semibold text-gray-200 tracking-wide">
+            Technologies I Work With
+          </h2>
         </div>
 
         {/* Tech Stack Logos */}
