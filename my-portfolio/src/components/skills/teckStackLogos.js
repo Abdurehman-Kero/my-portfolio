@@ -74,9 +74,9 @@ const StackLogos = () => {
           className="flex gap-6 py-6"
           style={{ willChange: "transform", width: "fit-content" }}
         >
-          {duplicatedLogos.map((LogoItem, index) => (
+          {duplicatedLogos.map(({ icon: IconComponent, name, color }, index) => (
             <motion.div
-              key={`${LogoItem.name}-${index}`}
+              key={`${name}-${index}`}
               className="flex-shrink-0 flex flex-col items-center justify-center cursor-pointer"
               style={{ width: "95px" }}
               onHoverStart={() => setHoveredIndex(index)}
@@ -96,7 +96,7 @@ const StackLogos = () => {
                   }
                 `}
                 style={{
-                  boxShadow: hoveredIndex === index ? `0 10px 25px -5px ${LogoItem.color}40` : "none"
+                  boxShadow: hoveredIndex === index ? `0 10px 25px -5px ${color}40` : "none"
                 }}
               >
                 {/* Glow ring */}
@@ -104,18 +104,18 @@ const StackLogos = () => {
                   <motion.div
                     layoutId="glowRing"
                     className="absolute inset-0 rounded-2xl -z-10"
-                    style={{ background: `radial-gradient(circle, ${LogoItem.color}25 0%, transparent 80%)` }}
+                    style={{ background: `radial-gradient(circle, ${color}25 0%, transparent 80%)` }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   />
                 )}
                 
-                <LogoItem.icon 
+                <IconComponent 
                   className="text-3xl transition-all duration-300"
                   style={{ 
-                    color: hoveredIndex === index ? LogoItem.color : "#9ca3af",
-                    filter: hoveredIndex === index ? `drop-shadow(0 0 10px ${LogoItem.color}80)` : "none"
+                    color: hoveredIndex === index ? color : "#9ca3af",
+                    filter: hoveredIndex === index ? `drop-shadow(0 0 10px ${color}80)` : "none"
                   }} 
                 />
               </div>
@@ -127,7 +127,7 @@ const StackLogos = () => {
                 `}
                 style={{ color: hoveredIndex === index ? "#e2e8f0" : "" }}
               >
-                {LogoItem.name}
+                {name}
               </span>
             </motion.div>
           ))}
