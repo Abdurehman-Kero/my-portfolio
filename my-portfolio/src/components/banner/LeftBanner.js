@@ -30,8 +30,8 @@ const LeftBanner = () => {
   return (
     <div className="w-full lgl:w-1/2 flex flex-col gap-8 relative text-center lgl:text-left">
       {/* Static background gradient */}
-      <div className="absolute -left-20 -top-20 w-64 h-64 bg-gradient-to-r from-[#9f55ff]/10 to-[#7000ff]/10 rounded-full blur-3xl -z-10" />
-      <div className="absolute -right-20 bottom-0 w-64 h-64 bg-gradient-to-r from-[#ff014f]/10 to-[#ff6b9d]/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute left-0 -top-20 w-64 h-64 bg-gradient-to-r from-[#9f55ff]/10 to-[#7000ff]/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute right-0 bottom-0 w-64 h-64 bg-gradient-to-r from-[#ff014f]/10 to-[#ff6b9d]/10 rounded-full blur-3xl -z-10" />
 
       <div className="flex flex-col gap-5 items-center lgl:items-start relative z-10">
         {/* Hello with LARGER pink gradient text and CUSTOM waving hand image */}
@@ -44,7 +44,7 @@ const LeftBanner = () => {
             <img
               src={waveImage}
               alt="waving hand"
-              className={`w-12 h-11 md:w-17 md:h-11 inline-block object-contain ${wave ? "animate-wave-rapid" : ""}`}
+              className={`waving-hand-img w-12 h-11 md:w-17 md:h-11 inline-block object-contain ${wave ? "animate-wave-rapid" : ""}`}
               style={{ transformOrigin: "40% 100%" }}
             />
           </div>
