@@ -4,8 +4,6 @@ import {
   FaTools,
   FaPencilAlt,
   FaRocket,
-  FaShieldAlt,
-  FaCode,
   FaCloud,
   FaRobot,
 } from "react-icons/fa";
