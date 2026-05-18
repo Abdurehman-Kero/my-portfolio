@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-scroll";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiSun, FiMoon } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 import { FaLinkedinIn } from "react-icons/fa";
 import { navLinksdata } from "../../constants";
@@ -10,6 +10,12 @@ import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const [isLight, setIsLight] = useState(false);
+
+  const toggleTheme = () => {
+    setIsLight(!isLight);
+    document.body.classList.toggle('light-theme');
+  };
 
   return (
     <div className="sticky top-0 z-50">
@@ -54,10 +60,20 @@ const Navbar = () => {
             ))}
           </ul>
 
+          {/* Theme Toggler */}
+          <span
+            onClick={toggleTheme}
+            className="text-xl w-10 h-10 inline-flex items-center justify-center rounded-full cursor-pointer hover:bg-gray-800 transition-all duration-300 ml-4 md:ml-8 theme-toggler"
+            style={{ color: isLight ? "#c4cfde" : "#ff014f" }}
+            title="Toggle Light/Dark Mode"
+          >
+            {isLight ? <FiMoon /> : <FiSun />}
+          </span>
+
           {/* Mobile Menu Button */}
           <span
             onClick={() => setShowMenu(!showMenu)}
-            className="text-xl mdl:hidden bg-black w-10 h-10 inline-flex items-center justify-center rounded-full text-[#ff014f] cursor-pointer hover:bg-gradient-to-r hover:from-[#ff014f] hover:to-[#ff6b9d] hover:text-white transition-all duration-300"
+            className="text-xl mdl:hidden bg-black w-10 h-10 inline-flex items-center justify-center rounded-full text-[#ff014f] cursor-pointer hover:bg-gradient-to-r hover:from-[#ff014f] hover:to-[#ff6b9d] hover:text-white transition-all duration-300 ml-2"
           >
             <FiMenu />
           </span>
