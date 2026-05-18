@@ -5,8 +5,9 @@ import {
   BsArrowLeft,
   BsCalendar3,
 } from "react-icons/bs";
-import { FaGlobe, FaCode, FaLayerGroup, FaCheckCircle } from "react-icons/fa";
+import { FaCode, FaLayerGroup, FaCheckCircle } from "react-icons/fa";
 import { HiExternalLink } from "react-icons/hi";
+
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -16,24 +17,24 @@ const ProjectDetail = () => {
   const [activeTab, setActiveTab] = useState("overview");
 
   useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        const response = await fetch("https://porfoliobe.abdurehman.com/api/projects");
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          const found = data.find((p) => String(p.id) === String(id));
+          setProject(found || null);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching project:", error);
+        setLoading(false);
+      }
+    };
+
     fetchProject();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id]);
-
-  const fetchProject = async () => {
-    try {
-      const response = await fetch("https://porfoliobe.abdurehman.com/api/projects");
-      const data = await response.json();
-      if (Array.isArray(data)) {
-        const found = data.find((p) => String(p.id) === String(id));
-        setProject(found || null);
-      }
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching project:", error);
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return (
